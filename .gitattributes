@@ -1,1 +1,4 @@
-*.js linguist-vendored = true
+
+
+public/* linguist-vendored
+views/* linguist-vendored
