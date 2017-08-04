@@ -1,0 +1,32 @@
+{
+  "name": "hiddo",
+  "description": "Web application to find and share hidden places",
+  "main": "app.js",
+  "authors": [
+    "Manuel Valle <vallerem17@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "hidden",
+    "place",
+    "new",
+    "discover",
+    "map",
+    "find",
+    "search"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "animate.css": "^3.5.2",
+    "reset-css": "^2.2.1"
+  }
+}
