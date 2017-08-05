@@ -10,7 +10,9 @@ $(document).ready(function() {
     $('#footer').css('margin-top', 10+ (docHeight - footerTop) + 'px');
    }
 
-
+   // Changes current nav link to active 
+   var pathname = window.location.pathname;
+   $('.navbar-nav > li > a[href="'+pathname+'"]').parent().addClass('active');
 
 
 

@@ -1,7 +1,22 @@
 /*****    INITIAL    ******/
 
 
+/*****     NAVBAR    ******/
+
+  .navbar-toggler {
+        z-index: 99;
+    }
+    
+    @media (max-width: 576px) {
+        nav > .container {
+            width: 100%;
+        }
+    }
+    
 /*****    HOME     ******/
+
+
+
 
 
 /*****    FOOTER     ******/
