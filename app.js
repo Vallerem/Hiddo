@@ -1,14 +1,27 @@
-const express = require('express');
-const path = require('path');
-const favicon = require('serve-favicon');
-const logger = require('morgan');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const expressLayouts = require('express-ejs-layouts')
+const express        = require('express');
+const path           = require('path');
+const favicon        = require('serve-favicon');
+const logger         = require('morgan');
+const cookieParser   = require('cookie-parser');
+const bodyParser     = require('body-parser');
+const expressLayouts = require('express-ejs-layouts');
+const mongoose       = require('mongoose');
+const passport       = require('passport');
+const session        = require('express-session');
+const MongoStore     = require('connect-mongo')(session);
 
+
+mongoose.connect('mongodb://localhost:27017/Hiddo-App');
+
+
+
+
+// Controllers
 const index = require('./routes/index');
 
 
+
+// Server
 const app = express();
 
 // view engine setup
@@ -26,8 +39,38 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
+
+
+
+///// Middleware /////
+
+app.use( (req, res, next) => {
+  if (typeof(req.user) !== "undefined"){
+    res.locals.userSignedIn = true;
+  } else {
+    res.locals.userSignedIn = false;
+  }
+  next();
+});
+
+app.use(session({
+  secret: 'Hiddo',
+  resave: false,
+  saveUninitialized: true,
+  store: new MongoStore( { mongooseConnection: mongoose.connection })
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
+
+//// Routes
+
 app.use('/', index);
 
+////////////////////////////////////////////////////////////////
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
