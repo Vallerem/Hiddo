@@ -18,6 +18,7 @@ mongoose.connect('mongodb://localhost:27017/Hiddo-App');
 
 // Controllers
 const index = require('./routes/index');
+const authRoutes = require('./routes/authentication');
 
 
 
@@ -69,6 +70,7 @@ app.use(passport.session());
 //// Routes
 
 app.use('/', index);
+app.use('/', authRoutes);
 
 ////////////////////////////////////////////////////////////////
 
