@@ -16,23 +16,6 @@ const User           = require('./models/user');
 
 mongoose.connect('mongodb://localhost:27017/Hiddo-App');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Controllers
 const index = require('./routes/index');
 const authRoutes = require('./routes/authentication');
@@ -88,15 +71,13 @@ passport.deserializeUser((id, cb) => {
   User.findById(id, (err, user) => {
     if (err) { return cb(err); }
     cb(null, user);
-    // console.log(user);
   });
 });
 
-// Signing Up
+// Strategy => Signing Up
 passport.use('local-signup', new LocalStrategy(
   { passReqToCallback: true },
   (req, username, password, next) => {
-    // To avoid race conditions
     process.nextTick(() => {
         User.findOne({
             'username': username
@@ -105,31 +86,75 @@ passport.use('local-signup', new LocalStrategy(
             if (user) {
                 return next(null, false);
             } else {
-              console.log(req.file);
                 console.log(req.body);
                 const hashPass = bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
+                // Checks if the user uploaded an avatar
+                let avatarUrl;
+                if (req.file === undefined) {
+                  avatarUrl = '/images/default.png';
+                } else {
+                  avatarUrl = `/uploads/${req.file.filename}`;
+                }
+                // Checkbox filter madness
+                let interestsArray = [req.body.nature, 
+                                  req.body.night,
+                                  req.body.romantic,
+                                  req.body.beach,
+                                  req.body.gastronomy,
+                                  req.body.historic,
+                                  req.body.abandoned,
+                                  req.body.peacefull,
+                                  req.body.mysterious,
+                                  req.body.folklore,
+                                  req.body.landscape,
+                                  req.body.urban,
+                    ]; 
+               let filteredArrayOfInterests = interestsArray.filter((e) => {
+                  return e !== undefined;
+                });
+              //  console.log(filteredArrayOfInterests);
+
+                // Creates and saves the new user
                 const newUser = new User({
                   username: req.body.username,
                   email: req.body.email,
                   password: hashPass,
-                  imgUrl: `/uploads/${req.file.filename}`,
-                  // userInfo: {
-                  //   description : ,
-                  //   country     :,
-                  //   interests   :
-                  // }
+                  imgUrl: avatarUrl,
+                  userInfo: {
+                    description :req.body.description ,
+                    country     :req.body.countrySelected ,
+                    interests   :filteredArrayOfInterests
+                  }
                 });
 
                 newUser.save((err) => {
                     if (err){ 
                       return next(err);
                     } else {
+                      console.log(newUser);
                     return next(null, newUser);}
                 });
             }
         });
     });
 }));
+
+/// Strategy =>  Login  ///// Should handle errors better (FLASH)
+passport.use('local-login', new LocalStrategy((username, password, next) => {
+  User.findOne({ username }, (err, user) => {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return next(null, false, { message: "Incorrect username" });
+    }
+    if (!bcrypt.compareSync(password, user.password)) {
+      return next(null, false, { message: "Incorrect password" });
+    }
+    return next(null, user);
+  });
+}));
+
 
 app.use(passport.initialize());
 app.use(passport.session());

@@ -20,7 +20,7 @@
 
 <div class="country_form">
   <label class="mr-sm-2" for="inlineFormCustomSelect"><strong>Select your Country</strong></label>
-  <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="country">
+  <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="country" name="countrySelected">
     <% countries.forEach( (country) => { %>
     <option name="country" value="<%=country %>"><%=country %></option>
     <%}); %>
