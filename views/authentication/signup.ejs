@@ -1,68 +1,74 @@
-<form>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+
+
+<form action="/signup" method="POST" class="signup_form" id="signup_form" enctype="multipart/form-data">
+    <div class="form-group">
+    <label for="Username"><strong>User name</strong></label>
+    <input type="text" name="username" class="form-control" id="username"  required>
   </div>
   <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    <label for="Mail"><strong>Email address</strong></label>
+    <input type="email" name="email" class="form-control" id="mail" aria-describedby="emailHelp" placeholder="example@example.com" required>
   </div>
   <div class="form-group">
-    <label for="exampleSelect1">Example select</label>
-    <select class="form-control" id="exampleSelect1">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-    </select>
+    <label for="Password"><strong>Password</strong></label>
+    <input name="password"  type="password" class="form-control" id="password"  required>
+ </div>
+ <div class="form-group">
+    <label for="Description"><strong>Description</strong> (optional)</label>
+    <textarea name="description" class="form-control" id="exampleTextarea" rows="4" placeholder="Tell us a bit about yourself!"></textarea>
   </div>
-  <div class="form-group">
-    <label for="exampleSelect2">Example multiple select</label>
-    <select multiple class="form-control" id="exampleSelect2">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-    </select>
+
+<div class="country_form">
+  <label class="mr-sm-2" for="inlineFormCustomSelect"><strong>Select your Country</strong></label>
+  <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="country">
+    <% countries.forEach( (country) => { %>
+    <option name="country" value="<%=country %>"><%=country %></option>
+    <%}); %>
+  </select>
   </div>
-  <div class="form-group">
-    <label for="exampleTextarea">Example textarea</label>
-    <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
-  </div>
-  <div class="form-group">
-    <label for="exampleInputFile">File input</label>
-    <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
-    <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
-  </div>
-  <fieldset class="form-group">
-    <legend>Radio buttons</legend>
-    <div class="form-check">
-      <label class="form-check-label">
-        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-        Option one is this and that&mdash;be sure to include why it's great
-      </label>
+
+<h5>Location interests<small> (Select at least 1)</small> </h5>
+
+  <div class="form-check row">
+    <label class="form-check-label col-sm-12 col-md-2">  
+    <input type="checkbox" class="form-check-input" name="nature" id="nature" value="Nature">Nature</label>
+    <label class="form-check-label col-sm-12 col-md-2">  
+    <input type="checkbox" class="form-check-input" name="night" id="night" value="Night">Night</label>
+     <label class="form-check-label col-sm-12 col-md-2">  
+    <input type="checkbox" class="form-check-input" name="romantic" id="romantic" value="Romantic">Romantic</label>
+    <label class="form-check-label col-sm-12 col-md-2">  
+    <input type="checkbox" class="form-check-input" name="beach" id="beach" value="Beach">Beach</label>
     </div>
-    <div class="form-check">
-    <label class="form-check-label">
-        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
-        Option two can be something else and selecting it will deselect option one
-      </label>
+
+<div class="form-check row">
+    <label class="form-check-label col-sm-12 col-md-2">  
+    <input type="checkbox" class="form-check-input" name="gastronomy" id="gastronomy" value="Gastronomy">Gastronomy </label>
+    <label class="form-check-label col-sm-12 col-md-2">  
+    <input type="checkbox" class="form-check-input" name="historic" id="historic" value="Historic">Historic </label>
+    <label class="form-check-label col-sm-12 col-md-2">  
+    <input type="checkbox" class="form-check-input" name="abandoned" id="abandoned" value="Abandoned">Abandoned </label>
+    <label class="form-check-label col-sm-12 col-md-2">  
+    <input type="checkbox" class="form-check-input" name="peacefull" id="peacefull" value="Peacefull">Peacefull </label>
+     </div>
+
+
+<div class="form-check row">
+    <label class="form-check-label col-sm-12 col-md-2">  
+    <input type="checkbox" class="form-check-input" name="mysterious" id="mysterious" value="Mysterious">Mysterious </label>
+    <label class="form-check-label col-sm-12 col-md-2">  
+    <input type="checkbox" class="form-check-input" name="folklore" id="folklore" value="Folklore">Folklore </label>
+    <label class="form-check-label col-sm-12 col-md-2">  
+    <input type="checkbox" class="form-check-input" name="landscape" id="landscape" value="Landscape">Landscape </label>
+    <label class="form-check-label col-sm-12 col-md-2">  
+    <input type="checkbox" class="form-check-input" name="urban" id="urban" value="Urban">Urban </label>
     </div>
-    <div class="form-check disabled">
-    <label class="form-check-label">
-        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3" disabled>
-        Option three is disabled
-      </label>
-    </div>
-  </fieldset>
-  <div class="form-check">
-    <label class="form-check-label">
-      <input type="checkbox" class="form-check-input">
-      Check me out
-    </label>
+
+<div class="form-group avatar_img">
+    <label for="Avatar"><strong>Avatar image</strong></label>
+    <input name ="imgUrl" type="file" class="form-control-file col-sm-12" id="avatar" aria-describedby="fileHelp">
+    <small id="fileHelp" class="form-text text-muted">Select and image to use as your avatar (only: jpg/jpeg/png/gif)</small>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+
+
+    <button class="signup-submit but btn-primary btn-lg" type="submit">Submit</button>
 </form>

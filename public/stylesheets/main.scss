@@ -1,18 +1,17 @@
 /*****    INITIAL    ******/
 
-
 /*****     NAVBAR    ******/
 
   .navbar-toggler {
         z-index: 99;
     }
-    
+
     @media (max-width: 576px) {
         nav > .container {
             width: 100%;
         }
     }
-    
+
 /*****    HOME     ******/
 
 
@@ -22,15 +21,7 @@
 /*****    FOOTER     ******/
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700,300");
 
-ul,li{
-    padding:0;
-    margin:0;
-}
-li{
-    list-style-type:none;
-}
-
-footer { background-color:#0c1a1e; min-height:350px; font-family: 'Open Sans', sans-serif; }
+footer { background-color:#0c1a1e; min-height:350px; font-family: 'Open Sans', sans-serif;}
 .footer-col { margin-top:50px; }
 .logofooter { margin-bottom:10px; font-size:25px; color:#fff; font-weight:700;}
 
@@ -78,3 +69,36 @@ footer { background-color:#0c1a1e; min-height:350px; font-family: 'Open Sans', s
  .google{
      background-color:#f63e28;
  }
+
+/*****    Signup FORM    ******/
+
+.signup_form {
+    margin: 10px 0 10px 0;
+    background: lightblue;
+    padding: 20px;
+}
+
+.but{
+    margin: 0 0 15px 0;
+}
+
+.country_form, .avatar_img{
+    margin: 20px 0;
+}
+
+div .form-check  {
+    margin: 15px 0 15px 15px;
+
+    @media (max-width: 480px){
+        font-size: 20px;
+    }
+}
+
+.signup-submit {
+    @media (max-width: 380px){
+        display:block;
+        margin: auto ;
+    }
+}
+
+

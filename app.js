@@ -7,11 +7,28 @@ const bodyParser     = require('body-parser');
 const expressLayouts = require('express-ejs-layouts');
 const mongoose       = require('mongoose');
 const passport       = require('passport');
+const LocalStrategy  = require('passport-local').Strategy;
 const session        = require('express-session');
 const MongoStore     = require('connect-mongo')(session);
+const bcrypt         = require('bcrypt');
+const User           = require('./models/user');
 
 
 mongoose.connect('mongodb://localhost:27017/Hiddo-App');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -54,6 +71,8 @@ app.use( (req, res, next) => {
   next();
 });
 
+
+//Passport
 app.use(session({
   secret: 'Hiddo',
   resave: false,
@@ -61,10 +80,61 @@ app.use(session({
   store: new MongoStore( { mongooseConnection: mongoose.connection })
 }));
 
+passport.serializeUser((user, cb) => {
+  cb(null, user.id);
+});
+
+passport.deserializeUser((id, cb) => {
+  User.findById(id, (err, user) => {
+    if (err) { return cb(err); }
+    cb(null, user);
+    // console.log(user);
+  });
+});
+
+// Signing Up
+passport.use('local-signup', new LocalStrategy(
+  { passReqToCallback: true },
+  (req, username, password, next) => {
+    // To avoid race conditions
+    process.nextTick(() => {
+        User.findOne({
+            'username': username
+        }, (err, user) => {
+            if (err){ return next(err); }
+            if (user) {
+                return next(null, false);
+            } else {
+              console.log(req.file);
+                console.log(req.body);
+                const hashPass = bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
+                const newUser = new User({
+                  username: req.body.username,
+                  email: req.body.email,
+                  password: hashPass,
+                  imgUrl: `/uploads/${req.file.filename}`,
+                  // userInfo: {
+                  //   description : ,
+                  //   country     :,
+                  //   interests   :
+                  // }
+                });
+
+                newUser.save((err) => {
+                    if (err){ 
+                      return next(err);
+                    } else {
+                    return next(null, newUser);}
+                });
+            }
+        });
+    });
+}));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-
+////////////////////////////////////////////////////////////////
 
 
 //// Routes
