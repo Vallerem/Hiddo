@@ -10,6 +10,9 @@ const COUNTRIES = ["Afghanistan", "Albania", "Algeria", "American Samoa", "Andor
 // Array of interests or types of localizations 
 const INTERESTS = ["Romantic", "Beach", "Gastronomy", "Historic", "Abandoned", "Peacefull", "Night", "Nature", "Mysterious", "Folklore", "Landscape", "Urban"];
 
+// Array of possible roles
+const ROLES = ['GUEST', 'EDITOR', 'ADMIN', 'WEBMASTER'];
+
 const userSchema = new Schema({
   username           : { type: String, required: true, unique: true, trim: true },
   email              : { type: String, required: true, unique: true },
@@ -25,6 +28,7 @@ const userSchema = new Schema({
   followers          : [{ type : Schema.ObjectId, ref: 'User' }],
   following          : [{ type : Schema.ObjectId, ref: 'User' }],
   facebookID         : String,
+  role: { type: String, enum :ROLES , default : 'GUEST'},
 }, {timestamps: true });
 
 const User = mongoose.model('User', userSchema);
