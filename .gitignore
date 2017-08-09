@@ -127,7 +127,7 @@ typings/
 # dotenv environment variables file
 .env
 
-# Images
+# Images extension
 *.jpg
 *.jpeg
 *.png
