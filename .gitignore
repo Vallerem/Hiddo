@@ -126,3 +126,9 @@ typings/
 
 # dotenv environment variables file
 .env
+
+# Images
+*.jpg
+*.jpeg
+*.png
+*.gif
