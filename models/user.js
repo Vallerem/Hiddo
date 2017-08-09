@@ -11,7 +11,7 @@ const COUNTRIES = ["Afghanistan", "Albania", "Algeria", "American Samoa", "Andor
 const INTERESTS = ["Romantic", "Beach", "Gastronomy", "Historic", "Abandoned", "Peacefull", "Night", "Nature", "Mysterious", "Folklore", "Landscape", "Urban"];
 
 // Array of possible roles
-const ROLES = ['GUEST', 'EDITOR', 'ADMIN', 'WEBMASTER'];
+const ROLES = ['EDITOR', 'ADMIN', 'WEBMASTER'];
 
 const userSchema = new Schema({
   username           : { type: String, required: true, unique: true, trim: true },
@@ -28,7 +28,7 @@ const userSchema = new Schema({
   followers          : [{ type : Schema.ObjectId, ref: 'User' }],
   following          : [{ type : Schema.ObjectId, ref: 'User' }],
   facebookID         : String,
-  role: { type: String, enum :ROLES , default : 'GUEST'},
+  role               : { type: String, enum :ROLES , default : 'EDITOR'},
 }, {timestamps: true });
 
 const User = mongoose.model('User', userSchema);

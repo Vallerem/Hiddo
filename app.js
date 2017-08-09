@@ -45,14 +45,6 @@ app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
 ///// Middleware /////
 
-app.use( (req, res, next) => {
-  if (typeof(req.user) !== "undefined"){
-    res.locals.userSignedIn = true;
-  } else {
-    res.locals.userSignedIn = false;
-  }
-  next();
-});
 
 
 //Passport
@@ -69,8 +61,11 @@ passport.serializeUser((user, cb) => {
 
 passport.deserializeUser((id, cb) => {
   User.findById(id, (err, user) => {
-    if (err) { return cb(err); }
-    cb(null, user);
+    if (err) { 
+      return cb(err); 
+    } else{
+      return cb(null, user);
+    }
   });
 });
 
@@ -151,13 +146,31 @@ passport.use('local-login', new LocalStrategy((username, password, next) => {
     if (!bcrypt.compareSync(password, user.password)) {
       return next(null, false, { message: "Incorrect password" });
     }
+    
     return next(null, user);
   });
 }));
 
-
 app.use(passport.initialize());
 app.use(passport.session());
+
+
+// probably a better sollution
+app.use((req, res, next) => {
+  res.locals.currentUser    = req.user;
+  if (req.user) {
+    res.locals.isUserLoggedIn = true;
+  } else {
+    res.locals.isUserLoggedIn = false;
+  }
+  // For now this is fine. If the social network grows we should only pass 
+  // some user data not the whole object (the JSON will be to big!)
+  
+  // console.log(req.session);
+  // console.log("********______*********");
+  // console.log(res.locals);
+  next();
+});
 
 ////////////////////////////////////////////////////////////////
 

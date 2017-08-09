@@ -1,3 +1,4 @@
+
   <nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navControl" aria-controls="navControl" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -6,12 +7,7 @@
             <a class="navbar-brand" href="/">Hiddo</a>
             <div class="collapse navbar-collapse" id="navControl">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">Log in</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/signup">Sign up</a>
-                    </li>
+                <% if (isUserLoggedIn){%>
                     <li class="nav-item">
                         <a class="nav-link" href="/about">About</a>
                     </li>
@@ -23,6 +19,20 @@
                         <button class="btn btn-danger" type="submit">Logout</a>
                     </form>
                         </li>
+                    <%} else {%>
+                        <li class="nav-item">
+                        <a class="nav-link" href="/login">Log in</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/signup">Sign up</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">Contact</a>
+                    </li>
+                        <%}%>
                 </ul>
             </div>
         </div>

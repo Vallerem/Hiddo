@@ -31,8 +31,11 @@ router.get('/signup', ensureLoggedOut(), (req, res, next) => {
     res.render('authentication/signup', {countries : User.COUNTRIES});
 });
 
-router.post('/signup', upload.single('imgUrl'), ensureLoggedOut(), passport.authenticate('local-signup', { successRedirect : '/',
-   failureRedirect : '/signup'}
+router.post('/signup', 
+upload.single('imgUrl'), 
+ensureLoggedOut(), passport.authenticate('local-signup', { 
+    successRedirect : '/',
+    failureRedirect : '/signup'}
 ));
 
 //// Login

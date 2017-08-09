@@ -1,8 +1,27 @@
 
 
 
+<% if (isUserLoggedIn){%>
+
+<h2>Hello, <%=currentUser.username%></h2>
+<img src="<%=currentUser.imgUrl%>" alt="user avatar">
+<ul>
+  
+
+<% currentUser.userInfo.interests.forEach((int)=>{ %>
+
+<li><%= int%></li>
+
+<%});%>
+</ul>
 
 
-<h1>This is the main page of Hiddo!</h1>
+<%} else {%>
+
+<h1>Not loggggged</h1>
 
 <img class="img-fluid rounded-circle" src="/images/default.png" alt="image ">
+
+
+<%}%> 
+
