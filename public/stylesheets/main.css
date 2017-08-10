@@ -1,6 +1,10 @@
 /*****    INITIAL    ******/
-/*****     NAVBAR    ******/
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700,300");
+.hidden {
+  display: none;
+}
+
+/*****     NAVBAR    ******/
 .navbar-toggler {
   z-index: 99;
 }
@@ -12,6 +16,7 @@
 }
 
 /*****    HOME     ******/
+/*****    ALERTS      ******/
 /*****    FOOTER     ******/
 footer {
   background-color: #0c1a1e;
@@ -154,9 +159,16 @@ footer {
 
 /*****    Signup FORM    ******/
 .signup_form {
-  margin: 10px 0 10px 0;
-  background: lightblue;
+  margin: auto;
   padding: 20px;
+  margin: 25px auto;
+  margin-top: 20px;
+  max-width: 800px;
+  border-radius: 4px;
+  background-color: #f7f7f7;
+  -moz-box-shadow: 0 0 3px 3px #888;
+  -webkit-box-shadow: 0 0 3px 3px #888;
+  box-shadow: 0 0 3px 3px #888;
 }
 
 .but {
@@ -164,7 +176,12 @@ footer {
 }
 
 .country_form, .avatar_img {
-  margin: 20px 0;
+  margin: 25px 0;
+}
+
+.img_upload {
+  margin: 7px 0 7px -13px;
+  display: inline-block;
 }
 
 div .form-check {
@@ -173,15 +190,30 @@ div .form-check {
 
 @media (max-width: 480px) {
   div .form-check {
-    font-size: 20px;
+    font-size: 30px;
+    padding: 10px 10px;
+    margin-left: 20px;
   }
 }
 
-@media (max-width: 380px) {
+.signup-submit {
+  padding: 8px 25px;
+}
+
+@media (max-width: 680px) {
   .signup-submit {
     display: block;
     margin: auto;
   }
+}
+
+.check_interests {
+  background-color: white;
+  border: 1px solid #025AA5;
+  padding: 10px 10px 10px 20px;
+  width: 200px;
+  text-align: left;
+  margin-top: 10px;
 }
 
 /*****    Login FORM    ******/

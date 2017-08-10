@@ -12,6 +12,7 @@ const session        = require('express-session');
 const MongoStore     = require('connect-mongo')(session);
 const bcrypt         = require('bcrypt');
 const User           = require('./models/user');
+const flash          = require("connect-flash");
 
 
 mongoose.connect('mongodb://localhost:27017/Hiddo-App');
@@ -39,7 +40,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
-
+app.locals.siteName = "Hiddo";
 
 
 
@@ -69,6 +70,8 @@ passport.deserializeUser((id, cb) => {
   });
 });
 
+//Flash messages
+app.use(flash()); 
 // Strategy => Signing Up
 passport.use('local-signup', new LocalStrategy(
   { passReqToCallback: true },
@@ -107,7 +110,7 @@ passport.use('local-signup', new LocalStrategy(
                let filteredArrayOfInterests = interestsArray.filter((e) => {
                   return e !== undefined;
                 });
-              //  console.log(filteredArrayOfInterests);
+                //  console.log(filteredArrayOfInterests);
 
                 // Creates and saves the new user
                 const newUser = new User({
@@ -155,9 +158,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+
 // probably a better sollution
 app.use((req, res, next) => {
-  res.locals.currentUser    = req.user;
+  res.locals.currentUser = req.user;
   if (req.user) {
     res.locals.isUserLoggedIn = true;
   } else {
@@ -165,10 +169,10 @@ app.use((req, res, next) => {
   }
   // For now this is fine. If the social network grows we should only pass 
   // some user data not the whole object (the JSON will be to big!)
-  
+
   // console.log(req.session);
-  // console.log("********______*********");
-  // console.log(res.locals);
+  console.log("********______*********");
+  console.log(res.locals);
   next();
 });
 

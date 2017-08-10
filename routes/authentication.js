@@ -40,18 +40,21 @@ ensureLoggedOut(), passport.authenticate('local-signup', {
 
 //// Login
 router.get('/login',  ensureLoggedOut(), (req, res, next) => {
-    res.render('authentication/login');
+    res.render('authentication/login', { "message": req.flash("error") });
 });
 
 router.post('/login', ensureLoggedOut(), passport.authenticate('local-login', {
   successRedirect : '/',
-  failureRedirect : '/login'
+  failureRedirect : '/login',
+  failureFlash: true,
+  passReqToCallback: true
 }));
 
 //// Logout
 router.post('/logout', ensureLoggedIn(), (req, res) => {
     req.logout();
     res.redirect('/');
+    
 });
 
 

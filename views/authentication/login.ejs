@@ -18,6 +18,9 @@
 			<button type="submit" class="btn-login btn btn-large btn-success">Login</button>
            </div>
        </form>
+			 <% if (typeof message !== "undefined") { %>
+    <div class="alert-danger"><%= message %></div>
+  <% } %>
 
 	<div class=""> 
        <p> Don't Have an Account? <a href="/signup"> Sign up now</a></p>

@@ -64,9 +64,9 @@ User.create(seeds, (err, newUser) => {
 User
 .findOne({ username: 'Manu' })
 .populate('followers', null, {username: "Estheru"})
-.exec(function (err, user) {
+.exec((err, user) => {
     if (err) {return (err);} else{
-    console.log(user.followers[0].email);
+    console.log(user.email);
     mongoose.connection.close();
     }
   });
