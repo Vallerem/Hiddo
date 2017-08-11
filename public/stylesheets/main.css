@@ -306,3 +306,27 @@ div .form-check {
   width: 100%;
   margin: 0 0 10px 0;
 }
+
+/*****    Contact FORM    ******/
+.contact-form {
+  margin: 20px auto;
+  width: 60%;
+}
+
+@media (max-width: 1000px) {
+  .contact-form {
+    width: 100%;
+  }
+}
+
+.bigicon {
+  font-size: 35px;
+  color: #36A0FF;
+}
+
+@media (max-width: 540px) {
+  .usericon {
+    position: relative;
+    bottom: -20px;
+  }
+}

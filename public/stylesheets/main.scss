@@ -215,8 +215,26 @@ div .form-check  {
 }
 
 
+/*****    Contact FORM    ******/
+.contact-form{
+    margin: 20px auto;
+    width: 60%;
+    @media (max-width: 1000px){
+     width: 100%;
+   }
+}
 
+.bigicon {
+  font-size: 35px;
+  color: #36A0FF;
+}
 
+.usericon {
+   @media (max-width: 540px){
+     position: relative;
+     bottom: -20px;
+   }
+}
 
 
 
