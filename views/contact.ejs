@@ -40,9 +40,18 @@
         <textarea class="form-control" id="contact_message" name="contact_message" placeholder="Enter your massage here." rows="7" required></textarea>
       </div>
     </div>
+     <% if (typeof err !== "undefined" && err === true) { %>
+        <div class="alert alert-danger"><strong><%= message %></strong></div>
+      <% } %>
+
+      <% if (typeof err !== "undefined" && err === false) { %>
+        <div class="alert alert-success"><strong><%= message %></strong></div>
+      <% } %>
 
     <% if (isUserLoggedIn){%>
     <input type="hidden" class="id_form" name="contact_user" value="<%= currentUser._id %>">
     <%}%>
        <button type="submit" class="btn btn-primary btn-lg btn-block">Send</button>
   </form>
+
+ 

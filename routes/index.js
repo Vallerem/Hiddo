@@ -55,28 +55,22 @@ router.post('/contact', function(req, res, next) {
       to: mail,
       subject: req.body.contact_subject,
       text: `Person: ${req.body.contact_name} ${req.body.contact_surname}
-      Mail: ${req.body.contact_email}
-      User: ${req.body.contact_user}
-      Phone number: ${req.body.contact_number}
+Mail: ${req.body.contact_email}
+User: ${req.body.contact_user}
+Phone number: ${req.body.contact_number}
       
       
-      ${req.body.contact_message}`
+${req.body.contact_message}`
   };
-
-      
-  console.log(newContactMail);
-
-
+  
   transporter.sendMail(newContactMail, function (error, response) {
       if (error) {
-          res.render('contact', { title: 'Raging Flame Laboratory - Contact', msg: 'Error occured, message not sent.', err: true, page: 'contact' });
+          res.render('contact', { message: 'There was an error. Try to contact us later.', err: true, page: 'contact' });
       }
       else {
-          res.render('contact', { title: 'Raging Flame Laboratory - Contact', msg: 'Message sent! Thank you.', err: false, page: 'contact' });
+          res.render('contact', {message: 'Message sent! Thank you.', err: false, page: 'contact' });
       }
-  });
-
-    
+  });    
 });
 
 

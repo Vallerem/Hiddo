@@ -16,8 +16,8 @@ const flash          = require("connect-flash");
 
 
 require("dotenv").config();
-
 mongoose.connect(process.env.MONGODB_URI);
+
 
 // Controllers
 const index = require('./routes/index');
@@ -173,8 +173,6 @@ app.use((req, res, next) => {
   // some user data not the whole object (the JSON will be to big!)
 
   // console.log(req.session);
-  console.log("********______*********");
-  console.log(res.locals);
   next();
 });
 
