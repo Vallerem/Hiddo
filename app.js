@@ -171,7 +171,7 @@ app.use((req, res, next) => {
   }
   // For now this is fine. If the social network grows we should only pass 
   // some user data not the whole object (the JSON will be to big!)
-
+  console.log(res.locals)
   // console.log(req.session);
   next();
 });

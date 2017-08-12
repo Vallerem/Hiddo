@@ -5,16 +5,24 @@
 }
 
 /*****     NAVBAR    ******/
-
-  .navbar-toggler {
-        z-index: 99;
+.navbar-brand{
+    margin-left: -20px;
+    @media(max-width: 670px){
+        text-align: center;
+        margin: auto;
     }
+}
 
-    @media (max-width: 576px) {
-        nav > .container {
-            width: 100%;
-        }
-    }
+.navbar-toggler {
+    z-index: 99;
+}
+
+@media (max-width: 576px) {
+    nav > .container {
+      width: 100%;
+   }
+}
+
 
 /*****    HOME     ******/
 
@@ -133,6 +141,10 @@ div .form-check  {
 
 /*****    Login FORM    ******/
 
+.alert-login {
+    text-align: center;
+  margin: 3px auto;
+}
 
 .form-signin {
   margin:auto;
@@ -216,8 +228,9 @@ div .form-check  {
 
 
 /*****    Contact FORM    ******/
+
 .contact-form{
-    margin: 20px auto;
+    margin: 30px auto;
     width: 60%;
     @media (max-width: 1000px){
      width: 100%;
@@ -231,9 +244,14 @@ div .form-check  {
 
 .usericon {
    @media (max-width: 540px){
-     position: relative;
-     bottom: -20px;
+     top: 18px;
    }
+}
+
+.icon-contact {
+     position: relative;
+     bottom: 6px;
+     text-align: center;
 }
 
 

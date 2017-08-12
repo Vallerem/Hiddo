@@ -14,13 +14,14 @@
 	<div class="main">	     
 		<input name="username" type="text" class="form-control" placeholder="User name" autofocus>
     <input name="password" type="password" class="form-control" placeholder="Password">
+			 <% if (typeof message !== "undefined") { %>
+    		<div class="alert-login alert-danger"><%= message %></div>
+  		 <% } %>
 		 <div class="submm">
 			<button type="submit" class="btn-login btn btn-large btn-success">Login</button>
            </div>
        </form>
-			 <% if (typeof message !== "undefined") { %>
-    <div class="alert-danger"><%= message %></div>
-  <% } %>
+		
 
 	<div class=""> 
        <p> Don't Have an Account? <a href="/signup"> Sign up now</a></p>

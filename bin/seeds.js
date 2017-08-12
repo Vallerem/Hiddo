@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/Hiddo-App');
+require("dotenv").config();
+mongoose.connect(process.env.MONGODB_URI);
 
 const User = require('../models/user');
 
@@ -61,14 +61,14 @@ User.create(seeds, (err, newUser) => {
 
 
 //Playing with populate
-User
-.findOne({ username: 'Manu' })
-.populate('followers', null, {username: "Estheru"})
-.exec((err, user) => {
-    if (err) {return (err);} else{
-    console.log(user.email);
-    mongoose.connection.close();
-    }
-  });
+// User
+// .findOne({ username: 'Manu' })
+// .populate('followers', null, {username: "Estheru"})
+// .exec((err, user) => {
+//     if (err) {return (err);} else{
+//     console.log(user.email);
+//     mongoose.connection.close();
+//     }
+//   });
 
 

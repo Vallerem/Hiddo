@@ -40,7 +40,7 @@ ensureLoggedOut(), passport.authenticate('local-signup', {
 
 //// Login
 router.get('/login',  ensureLoggedOut(), (req, res, next) => {
-    res.render('authentication/login', { "message": req.flash("error") });
+    res.render('authentication/login', { message : req.flash("error")});
 });
 
 router.post('/login', ensureLoggedOut(), passport.authenticate('local-login', {

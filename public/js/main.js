@@ -13,13 +13,18 @@ $(document).ready(function() {
   var pathname = window.location.pathname;
   $('.navbar-nav > li > a[href="' + pathname + '"]').parent().addClass('active');
 
-  //Form data handler
+  // Form data handler for checkboxes on signup
   $("#signup_form").submit(function(event) {
     if ($('span.button-checkbox  :checkbox:checked').length <= 0) {
       event.preventDefault();
       $('div .alert-danger').remove();
       $('.avatar_img').prepend('<div class="alert alert-danger" role="alert"><strong>Hey, listen!</strong>  Please, select at least 1 interest.</div>');
     }
+  });
+
+  // Prevents multiple form submits
+  $('form').submit(function(){
+  $(this).find(':submit').attr('disabled','disabled');
   });
 
   // Hide Navbar on !focus (click on main/footer div)

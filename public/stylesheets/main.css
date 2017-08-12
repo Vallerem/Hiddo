@@ -5,6 +5,17 @@
 }
 
 /*****     NAVBAR    ******/
+.navbar-brand {
+  margin-left: -20px;
+}
+
+@media (max-width: 670px) {
+  .navbar-brand {
+    text-align: center;
+    margin: auto;
+  }
+}
+
 .navbar-toggler {
   z-index: 99;
 }
@@ -217,6 +228,11 @@ div .form-check {
 }
 
 /*****    Login FORM    ******/
+.alert-login {
+  text-align: center;
+  margin: 3px auto;
+}
+
 .form-signin {
   margin: auto;
   margin-top: 20px;
@@ -309,7 +325,7 @@ div .form-check {
 
 /*****    Contact FORM    ******/
 .contact-form {
-  margin: 20px auto;
+  margin: 30px auto;
   width: 60%;
 }
 
@@ -326,7 +342,12 @@ div .form-check {
 
 @media (max-width: 540px) {
   .usericon {
-    position: relative;
-    bottom: -20px;
+    top: 18px;
   }
+}
+
+.icon-contact {
+  position: relative;
+  bottom: 6px;
+  text-align: center;
 }
