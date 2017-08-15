@@ -3,6 +3,7 @@ const router    = express.Router();
 const User      = require('../models/user');
 const passport  = require('passport');
 const multer    = require('multer');
+const global    = require('../global')
 const { ensureLoggedIn, ensureLoggedOut } = require('connect-ensure-login');
 
 
@@ -28,7 +29,7 @@ let upload = multer({ storage:storage, fileFilter: imageFilter });
 
 //// Signup
 router.get('/signup', ensureLoggedOut(), (req, res, next) => {
-    res.render('authentication/signup', {countries : User.COUNTRIES});
+    res.render('authentication/signup', {countries : global.COUNTRIES});
 });
 
 router.post('/signup', 
