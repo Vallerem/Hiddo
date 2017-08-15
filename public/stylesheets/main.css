@@ -1,4 +1,7 @@
 /***********/
+/*****    Variables    ******/
+/***********/
+/***********/
 /*****    Mixins    ******/
 /***********/
 /*****    INITIAL    ******/
@@ -28,6 +31,55 @@
 }
 
 /*****     NAVBAR    ******/
+.dropdown-user {
+  background: #292B2C;
+  text-align: left;
+  width: 210px;
+  position: absolute;
+  left: -144px;
+}
+
+@media (max-width: 750px) {
+  .dropdown-user {
+    margin-left: 90px;
+    margin-bottom: -50px;
+  }
+  .dropdown-user li {
+    border-top: 1px solid grey;
+    width: 240px;
+  }
+}
+
+@media (max-width: 450px) {
+  .dropdown-user {
+    width: 190px;
+    margin-left: 90px;
+    margin-bottom: -50px;
+  }
+  .dropdown-user li {
+    border-top: 1px solid grey;
+    width: 160px;
+  }
+}
+
+.dropdown-user li {
+  padding: 4px 20px 4px 10px;
+}
+
+.dropdown-user li a, .dropdown-user li button {
+  color: white;
+}
+
+.dropdown-user li a i.nav-icon, .dropdown-user li button i.nav-icon {
+  padding-left: 7px;
+  font-size: 23px;
+}
+
+.dropdown-user li a:hover, .dropdown-user li button:hover {
+  color: #C7E7BE;
+  text-decoration: none;
+}
+
 @media (min-width: 600px) {
   .logo-hiddo {
     padding-left: 30px;
@@ -44,24 +96,24 @@
   margin-right: 5px;
 }
 
-@media (max-width: 780px) {
-  .nav-last-item {
-    margin-bottom: -50px;
-  }
-}
-
-@media (max-width: 780px) {
-  .user-dropdown {
-    text-align: right;
-    position: relative;
-    bottom: 20px;
-  }
-}
-
 .user-menu {
   color: white;
   background: #292B2C;
   border: none;
+}
+
+@media (max-width: 750px) {
+  .user-menu {
+    float: left;
+    position: relative;
+    top: 40px;
+  }
+}
+
+@media (max-width: 750px) {
+  .about-item {
+    margin-top: 50px;
+  }
 }
 
 .btn-link {
@@ -79,20 +131,23 @@
   height: 35px;
 }
 
-@media (max-width: 670px) {
+@media (max-width: 750px) {
+  .user-nav-img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 750px) {
   .navbar-brand {
     text-align: center;
     margin: auto;
   }
 }
 
-.navbar-toggler {
-  z-index: 99;
-}
-
-@media (max-width: 576px) {
-  nav > .container {
-    width: 100%;
+@media (max-width: 750px) {
+  .nav-item-dest {
+    border-top: 1px solid #FF6F42;
   }
 }
 

@@ -5,43 +5,47 @@
             <span class="navbar-toggler-icon"></span>
         </button>    
             <a class="navbar-brand logo-hiddo" href="/">Hiddo</a>
-        <div class="collapse navbar-collapse navbar-comntent" id="navControl">
+        <div class="collapse navbar-collapse navbar-content mobile-control" id="navControl">
             <ul class="navbar-nav ml-auto">
                 <% if (isUserLoggedIn){%>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-last-item" href="/contact">Contact</a>
-                    </li>
+                     <li class="nav-item li-user-dropdown">
                         <div class="user-dropdown dropdown">
                                 <button class="dropdown-toggle user-menu" type="button" id="menu1" data-toggle="dropdown">
                                     <img class="img-fluid rounded-circle user-nav-img" src="<%=currentUser.imgUrl%>" alt="user avatar">
-                                    <span class="caret"></span>
+                                    <span class="caret hidden"></span>
                                 </button>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                    <li><p>Hi,<%=currentUser.username%> </p></li>
+                                <ul class="dropdown-menu dropdown-menu-right dropdown-user" role="menu" aria-labelledby="menu1">
                                     <li><a href="/profile">Your profile</a></li>
-                                    <li><a href="/new-spot">New Spot</a></li>
-                                    <li><a href="/fav-spots">Loved locaions</a></li>
-                                    <li><form action="/logout" method="post">
+
+                                    <li><a href="/new-spot">New Spot <span> <i class="fa fa-plus-circle nav-icon" aria-hidden="true"></i></span></a></li>
+                                    <li><a href="/fav-spots">Loved Spots <span><i class="fa fa-heart nav-icon" aria-hidden="true"></i>
+                                    </span></a></li>
+
+                                    <li ><form action="/logout" method="post">
                                     <button type="submit" class="btn-link">Log out</a>
-                                    </form></li>
-                                    <li class="divider"></li>
+                                    </form></li>     
                                 </ul>
                         </div>
                     </li>
+
+                    <li class="nav-item-dest about-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item-dest">
+                        <a class="nav-link nav-last-item" href="/contact">Contact</a>
+                    </li>
+                   
                 <%} else {%>
                         <li class="nav-item">
                         <a class="nav-link" href="/login">Log in</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item-dest">
                         <a class="nav-link" href="/signup">Sign up</a>
                     </li>
-                     <li class="nav-item">
+                     <li class="nav-item-dest">
                         <a class="nav-link" href="/about">About</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item-dest">
                         <a class="nav-link" href="/contact">Contact</a>
                     </li>
                  <%}%>

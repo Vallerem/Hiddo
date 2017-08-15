@@ -1,4 +1,17 @@
+function resize() {
+    if ($(window).width() > 740) {
+     $('.li-user-dropdown').addClass('flex-last');
+    }
+    else {$('.li-user-dropdown').removeClass('flex-last');}
+}
+  $(window).resize(resize);
+  resize();
+
+
 $(document).ready(function() {
+
+  // changes the position of the user dropdown
+
 
   /// Make the footer position great again
   var docHeight = $(window).height();

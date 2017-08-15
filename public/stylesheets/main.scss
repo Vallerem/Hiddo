@@ -1,3 +1,8 @@
+/***********//*****    Variables    ******//***********/
+
+$primary: #C7E7BE;
+$secundary: #FF6F42;
+
 
 /***********//*****    Mixins    ******//***********/
 
@@ -39,7 +44,54 @@
   @include placeholder(#A0A3A4, 12px);
 }
 
+
+
 /*****     NAVBAR    ******/
+
+.dropdown-user {
+  background: #292B2C;
+  text-align: left;
+  width: 210px;
+  position:absolute;
+  left: -144px;
+
+  @media(max-width:750px){
+    margin-left: 90px;
+    margin-bottom:-50px;
+    li {
+      border-top: 1px solid grey;
+      width: 240px;
+    }
+  }
+
+  @media(max-width:450px){
+    width: 190px;
+    margin-left: 90px;
+    margin-bottom:-50px;
+    li {
+      border-top: 1px solid grey;
+      width: 160px;
+    }
+  }
+
+
+  li {
+    padding: 4px 20px 4px 10px;
+    a, button {
+      color: white;
+
+      i.nav-icon{
+        padding-left: 7px;
+        font-size: 23px;
+      }
+    }
+    a:hover, button:hover {
+      color: $primary;
+      text-decoration: none;
+    }
+  }
+}
+
 .logo-hiddo {
   @media(min-width:600px){
     padding-left: 30px;
@@ -54,24 +106,22 @@
 .nav-item{
   margin-right: 5px;
 }
-.nav-last-item{
-  @media (max-width:780px){
-   margin-bottom: -50px;
- } 
-}
-
-.user-dropdown{
- @media (max-width: 780px){
-   text-align: right;
-   position:relative;
-   bottom:20px;
- } 
-}
 
 .user-menu{
   color:white;
   background:#292B2C;
   border:none;  
+  @media(max-width:750px){
+    float:left;
+    position:relative;
+    top:40px;
+  }
+}
+
+.about-item {
+  @media(max-width:750px){
+    margin-top: 50px;
+  }
 }
 
 .btn-link{
@@ -86,23 +136,22 @@
   border-radius:50%;
   width: 35px;
   height: 35px;
+   @media(max-width: 750px){
+        width: 50px;
+        height: 50px;
+    }
 }
 .navbar-brand{
- 
-    @media(max-width: 670px){
+    @media(max-width: 750px){
         text-align: center;
         margin: auto;
     }
 }
 
-.navbar-toggler {
-    z-index: 99;
-}
-
-@media (max-width: 576px) {
-    nav > .container {
-      width: 100%;
-   }
+.nav-item-dest {
+    @media(max-width: 750px){
+      border-top: 1px solid $secundary;
+    }
 }
 
 
