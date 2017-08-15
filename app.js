@@ -164,17 +164,19 @@ app.use(passport.session());
 // probably a better sollution
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
+  // res.locals.session = req.session.session;
   if (req.user) {
     res.locals.isUserLoggedIn = true;
   } else {
     res.locals.isUserLoggedIn = false;
   }
   // For now this is fine. If the social network grows we should only pass 
-  // some user data not the whole object (the JSON will be to big!)
-  console.log(res.locals)
-  // console.log(req.session);
+  // some user data, not the whole object.
+  console.log(res.locals);
   next();
 });
+
+
 
 ////////////////////////////////////////////////////////////////
 

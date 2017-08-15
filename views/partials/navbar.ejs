@@ -1,38 +1,37 @@
 
-  <nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse">
+ 
+<nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navControl" aria-controls="navControl" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="container">
-            <a class="navbar-brand" href="/">Hiddo</a>
-            <div class="collapse navbar-collapse" id="navControl">
-                <ul class="navbar-nav ml-auto">
+        </button>    
+            <a class="navbar-brand logo-hiddo" href="/">Hiddo</a>
+        <div class="collapse navbar-collapse navbar-comntent" id="navControl">
+            <ul class="navbar-nav ml-auto">
                 <% if (isUserLoggedIn){%>
                     <li class="nav-item">
                         <a class="nav-link" href="/about">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/contact">Contact</a>
+                        <a class="nav-link nav-last-item" href="/contact">Contact</a>
                     </li>
-                    <li>
-                    <form action="/logout" method="POST">
-                        <button class="btn btn-danger" type="submit">Logout</a>
-                    </form>
-                        </li>
-                    <li><div class="dropdown">
-    <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
-     <img width="50px" height="910px"class="img-fluid rounded-circle" src="<%=currentUser.imgUrl%>" alt="user avatar">
-       <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Menu item 1</a></li>
-      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Menu item 2</a></li>
-      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Menu item 3</a></li>
-      <li role="presentation" class="divider"></li>
-      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Menu item 4</a></li>
-    </ul>
-  </div></li>
-                    <%} else {%>
+                        <div class="user-dropdown dropdown">
+                                <button class="dropdown-toggle user-menu" type="button" id="menu1" data-toggle="dropdown">
+                                    <img class="img-fluid rounded-circle user-nav-img" src="<%=currentUser.imgUrl%>" alt="user avatar">
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                    <li><p>Hi,<%=currentUser.username%> </p></li>
+                                    <li><a href="/profile">Your profile</a></li>
+                                    <li><a href="/new-spot">New Spot</a></li>
+                                    <li><a href="/fav-spots">Loved locaions</a></li>
+                                    <li><form action="/logout" method="post">
+                                    <button type="submit" class="btn-link">Log out</a>
+                                    </form></li>
+                                    <li class="divider"></li>
+                                </ul>
+                        </div>
+                    </li>
+                <%} else {%>
                         <li class="nav-item">
                         <a class="nav-link" href="/login">Log in</a>
                     </li>
@@ -45,8 +44,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/contact">Contact</a>
                     </li>
-                        <%}%>
-                </ul>
-            </div>
+                 <%}%>
+            </ul>
         </div>
     </nav>

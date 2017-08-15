@@ -1,12 +1,82 @@
+/***********/
+/*****    Mixins    ******/
+/***********/
 /*****    INITIAL    ******/
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700,300");
 .hidden {
   display: none;
 }
 
+[placeholder]::-webkit-input-placeholder {
+  color: #A0A3A4;
+  font-size: 12px;
+}
+
+[placeholder]:-moz-placeholder {
+  color: #A0A3A4;
+  font-size: 12px;
+}
+
+[placeholder]::-moz-placeholder {
+  color: #A0A3A4;
+  font-size: 12px;
+}
+
+[placeholder]:-ms-input-placeholder {
+  color: #A0A3A4;
+  font-size: 12px;
+}
+
 /*****     NAVBAR    ******/
-.navbar-brand {
-  margin-left: -20px;
+@media (min-width: 600px) {
+  .logo-hiddo {
+    padding-left: 30px;
+  }
+}
+
+@media (min-width: 600px) {
+  .navbar-comntent {
+    margin-right: 30px;
+  }
+}
+
+.nav-item {
+  margin-right: 5px;
+}
+
+@media (max-width: 780px) {
+  .nav-last-item {
+    margin-bottom: -50px;
+  }
+}
+
+@media (max-width: 780px) {
+  .user-dropdown {
+    text-align: right;
+    position: relative;
+    bottom: 20px;
+  }
+}
+
+.user-menu {
+  color: white;
+  background: #292B2C;
+  border: none;
+}
+
+.btn-link {
+  background: none !important;
+  color: inherit;
+  border: none;
+  padding: 0 !important;
+  font: inherit;
+}
+
+.user-nav-img {
+  object-fit: cover;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
 }
 
 @media (max-width: 670px) {

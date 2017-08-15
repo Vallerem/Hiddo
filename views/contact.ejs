@@ -15,7 +15,10 @@
     <div class="form-group row">
       <label for="email" class="fa icon-contact fa-envelope-o bigicon col-2 col-sm-2 col-form-label"></label>
       <div class="col-10 col-sm-10">
-        <input type="email" class="form-control" id="contact_email" placeholder="E-mail"  name="contact_email" required>
+        <input type="email" class="form-control" id="contact_email" placeholder="E-mail" name="contact_email" 
+        <% if (isUserLoggedIn) {%>
+        value="<%=currentUser.email %>" 
+        <%}%> required>
       </div>
     </div>
 

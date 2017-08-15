@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 const bcrypt   = require('bcrypt');
-const Locaion  = require('./location');
+const Spot  = require('./spot');
 
 
 // Array of countries 
@@ -24,8 +24,8 @@ const userSchema = new Schema({
     interests   : [{ type: String, enum: INTERESTS, required: true }],
   },
   imgUrl             : { type: String, default: "/images/default.png" },
-  userLocations      : [{ type : Schema.ObjectId, ref: 'Location' }],
-  favouriteLocations : [{ type : Schema.ObjectId, ref: 'Location' }],
+  userSpots          : [{ type : Schema.ObjectId, ref: 'Spot' }],
+  favouriteSpots     : [{ type : Schema.ObjectId, ref: 'Spot' }],
   followers          : [{ type : Schema.ObjectId, ref: 'User' }],
   following          : [{ type : Schema.ObjectId, ref: 'User' }],
   facebookID         : String,

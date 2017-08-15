@@ -1,12 +1,94 @@
+
+/***********//*****    Mixins    ******//***********/
+
+@mixin placeholder($color, $size:"") {
+  &::-webkit-input-placeholder {
+    color: $color;
+    @if $size != "" {
+      font-size: $size;
+    }
+  }
+  &:-moz-placeholder {
+    color: $color;
+    @if $size != "" {
+      font-size: $size;
+    }
+  }
+  &::-moz-placeholder {
+    color: $color;
+    @if $size != "" {
+      font-size: $size;
+    }
+  }
+  &:-ms-input-placeholder {
+    color: $color;
+    @if $size != "" {
+      font-size: $size;
+    }
+  }
+}
+
+
 /*****    INITIAL    ******/
 
 .hidden{
   display:none;
 }
 
+[placeholder] {
+  @include placeholder(#A0A3A4, 12px);
+}
+
 /*****     NAVBAR    ******/
+.logo-hiddo {
+  @media(min-width:600px){
+    padding-left: 30px;
+  }
+}
+
+.navbar-comntent{
+  @media(min-width:600px){
+    margin-right: 30px;
+  }
+}
+.nav-item{
+  margin-right: 5px;
+}
+.nav-last-item{
+  @media (max-width:780px){
+   margin-bottom: -50px;
+ } 
+}
+
+.user-dropdown{
+ @media (max-width: 780px){
+   text-align: right;
+   position:relative;
+   bottom:20px;
+ } 
+}
+
+.user-menu{
+  color:white;
+  background:#292B2C;
+  border:none;  
+}
+
+.btn-link{
+  background:none!important;
+  color:inherit;
+  border:none; 
+  padding:0!important;
+  font: inherit;
+}
+.user-nav-img {
+  object-fit: cover;
+  border-radius:50%;
+  width: 35px;
+  height: 35px;
+}
 .navbar-brand{
-    margin-left: -20px;
+ 
     @media(max-width: 670px){
         text-align: center;
         margin: auto;
@@ -142,7 +224,7 @@ div .form-check  {
 /*****    Login FORM    ******/
 
 .alert-login {
-    text-align: center;
+  text-align: center;
   margin: 3px auto;
 }
 
@@ -253,8 +335,6 @@ div .form-check  {
      bottom: 6px;
      text-align: center;
 }
-
-
 
 
 

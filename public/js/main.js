@@ -23,7 +23,7 @@ $(document).ready(function() {
   });
 
   // Prevents multiple form submits
-  $('form').submit(function(){
+  $('form.contact-form, form.signup_form').submit(function(){
   $(this).find(':submit').attr('disabled','disabled');
   });
 
@@ -82,6 +82,10 @@ $(document).ready(function() {
     }
     init();
   });
+
+
+
+
 
 
 
