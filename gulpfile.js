@@ -1,6 +1,6 @@
-const gulp   = require('gulp');
-const rename = require("gulp-rename");
-const uglify = require('gulp-uglify');
+const gulp        = require('gulp');
+const rename      = require("gulp-rename");
+const uglify      = require('gulp-uglify');
 const browserSync = require('browser-sync').create();
   
 gulp.task('uglify', function() {

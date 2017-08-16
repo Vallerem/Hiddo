@@ -97,6 +97,7 @@
 }
 
 .user-menu {
+  cursor: pointer;
   color: white;
   background: #292B2C;
   border: none;
@@ -125,6 +126,7 @@
 }
 
 .user-nav-img {
+  cursor: pointer;
   object-fit: cover;
   border-radius: 50%;
   width: 35px;
