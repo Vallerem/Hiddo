@@ -5,7 +5,6 @@
 /*****    Mixins    ******/
 /***********/
 /*****    INITIAL    ******/
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700,300");
 .hidden {
   display: none;
 }
@@ -31,6 +30,21 @@
 }
 
 /*****     NAVBAR    ******/
+@media (min-width: 760px) {
+  .logout-link:before {
+    content: " ";
+    display: block;
+    width: 100%;
+    border-top: 1px solid grey;
+    margin: 0 0 5px 0;
+  }
+}
+
+.logout-link:hover .btn-link {
+  cursor: pointer;
+  color: #FF6F42;
+}
+
 .dropdown-user {
   background: #292B2C;
   text-align: left;
@@ -156,10 +170,15 @@
 /*****    HOME     ******/
 /*****    ALERTS      ******/
 /*****    FOOTER     ******/
+@font-face {
+  font-family: "Open_Sans";
+  src: url("../fonts/Open_sans.woff2") format("woff2");
+}
+
 footer {
   background-color: #0c1a1e;
   min-height: 350px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Open_Sans', sans-serif;
 }
 
 .footer-col {
@@ -176,7 +195,7 @@ footer {
 .footer-col p {
   color: #fff;
   font-size: 12px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Open_Sans', sans-serif;
   margin-bottom: 15px;
 }
 

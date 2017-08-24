@@ -20,8 +20,10 @@ mongoose.connect(process.env.MONGODB_URI);
 
 
 // Controllers
-const index = require('./routes/index');
+const index      = require('./routes/index');
 const authRoutes = require('./routes/authentication');
+const spotRoutes = require('./routes/spots') 
+const profile    = require('./routes/profile') 
 
 
 
@@ -185,6 +187,8 @@ app.use((req, res, next) => {
 
 app.use('/', index);
 app.use('/', authRoutes);
+app.use('/', spotRoutes);
+app.use('/', profile);
 
 ////////////////////////////////////////////////////////////////
 
