@@ -6,6 +6,10 @@ $secundary: #FF6F42;
 
 /***********//*****    Mixins    ******//***********/
 
+input[type="password"] {
+  font: 20px sans-serif;
+}
+
 @mixin placeholder($color, $size:"") {
   &::-webkit-input-placeholder {
     color: $color;
@@ -345,18 +349,7 @@ div .form-check  {
 .form-signin .checkbox {
   font-weight: normal;
 }
-.form-signin .form-control {
-  position: relative;
-  font-size: 16px;
-  height: 20px;
-  padding: 20px;
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-}
-.form-signin .form-control:focus {
-  z-index: 2;
-}
+
 .form-signin input[type="text"] {
   margin-bottom: 10px;
   border-radius: 5px;
@@ -408,7 +401,71 @@ div .form-check  {
      text-align: center;
 }
 
+/*****     NEW-SPOT    ******/
+
+.fa-refresh {
+  padding: 0 5px;
+  margin:  0 3px 0 0;
+}
+
+.alert-loc-saved, .alert-no-loc{
+  display:inline-block;
+  margin: 5px 0 5px 0;
+}
 
 
+   /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map-search {
+        height: 400px;
+        width: 800px;
+        margin: 10px 0 10px 0;
+        @media(max-width: 700px) {
+          width:100%
+        }
+      }
 
+      .controls {
+        margin-top: 10px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 32px;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      }
 
+      #pac-input {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 300px;
+      }
+
+      #pac-input:focus {
+        border-color: #4d90fe;
+      }
+
+      .pac-container {
+        font-family: Roboto;
+      }
+
+      #type-selector {
+        color: #fff;
+        background-color: #4d90fe;
+        padding: 5px 11px 0px 11px;
+      }
+
+      #type-selector label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+      }
+      #target {
+        width: 345px;
+      }

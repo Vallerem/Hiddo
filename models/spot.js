@@ -8,7 +8,7 @@ const spotSchema = new Schema({
   name        : { type: String, required: true },
   mainImage   : { type: String, default: "/images/default_spot.jpg"  },
   spotInfo    : {
-     introduction : { type: String,},
+     introduction : { type: String, required: true},
      description  : { type: String, required: true },
      howToArrive  : { type: String },
      tips         : { type: String },

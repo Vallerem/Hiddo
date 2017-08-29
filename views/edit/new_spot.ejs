@@ -1,1 +1,185 @@
-<%= global.INTERESTS%>
+
+<form class="spot_form" id="spot_form" action="/new-spot" method="post" enctype="multipart/form-data">
+
+  <input type="hidden" class="id_form" name="creator" value="<%= currentUser._id %>" required>
+
+  <div class="form-group">
+    <label for="name"><strong>Spot name</strong></label>
+    <input type="text" name="name" class="form-control" id="spot-name" required>
+  </div>
+
+  <div class="country_form">
+  <label class="mr-sm-2" for="inlineFormCustomSelect"><strong>Spot continent</strong></label>
+  <select class="custom-select" id="spot-continent" name="continent" required>
+    <% global.CONTINENTS.forEach( (continent) => { %>
+    <option name="continent" value="<%=continent %>"><%=continent %></option>
+    <%}); %>
+  </select>
+  </div>
+
+  <div class="country_form">
+  <label class="mr-sm-2" for="inlineFormCustomSelect"><strong>Spot country</strong></label>
+  <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="country" name="country" required>
+    <% global.COUNTRIES.forEach( (country) => { %>
+    <option name="country" value="<%=country %>"><%=country %></option>
+    <%}); %>
+  </select>
+  </div>
+
+  <div class="category_form">
+  <label class="mr-sm-2" for="inlineFormCustomSelect"><strong>Spot category</strong></label>
+  <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="category" name="category" required>
+    <% global.INTERESTS.forEach( (interest) => { %>
+    <option name="category" value="<%=interest %>"><%=interest %></option>
+    <%}); %>
+  </select>
+  </div>
+
+
+<h2>detailed information</h2>
+
+  <div class="form-group spot-intro">
+    <label for="introduction"><strong>Brief quote to describe this spot</strong></label>
+    <textarea name="introduction" class="form-control" id="spot-introduction" rows="2" placeholder="(Max: 100 characters)" maxlength="100" required></textarea>
+  </div>
+
+
+  <div class="form-group">
+    <label for="description"><strong>What makes this place special</strong></label>
+    <textarea name="description" class="form-control" id="spot-description" rows="7" placeholder="Explain why is this hidden gem so unique and what you lived there" required></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="howToArrive"><strong>How did you get there?</strong></label>
+    <textarea name="howToArrive" class="form-control" id="howToArrive" rows="2" placeholder="Is there something necessary to get there?" ></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="tips"><strong>Some tips for future visitants</strong></label>
+    <textarea name="tips" class="form-control" id="tips" rows="2" placeholder="Share some wisdom!" ></textarea>
+  </div>
+
+  <div class="form-group avatar_img">
+    <label for="mainImage"><strong>Spot image</strong></label>
+    <input name ="mainImage" type="file" class="form-control-file col-sm-12 img_upload" id="mainImage" aria-describedby="fileHelp" required>
+    <small id="fileHelp" class="form-text text-muted">Only : jpg/jpeg/png/gif)</small>
+  </div>
+
+  <input type="hidden" for="latitude" id="spot-latitude" name="latitude" value="" required>
+
+  <input type="hidden" for="longitude" id="spot-longitude" name="longitude" value="" required>
+
+
+<h3>Spot location</h3>
+
+  <div class="form-group use-current-location">
+  <button class="btn btn-primary" type="button" id="current-location">
+  Use current location</button>
+  
+  </div>
+
+<div id="google_map" class="hidden" style="width:800px;height:400px;">
+  </div>
+
+
+  
+
+<button class="btn btn-primary" type="button" id="existing-location">
+  Use an existing or near location</button>
+
+  <button class="btn btn-success" type="button" id="save-existing-location">
+  Save chosen location</button>
+
+<div class="existing-loc">
+ <input id="pac-input" class="controls" type="text" placeholder="Search Location">
+ <div id="map-search"></div>
+</div>
+
+
+  <script>
+    var spotLat, spotLng, spotName;
+    function initAutocomplete() {
+        var map = new google.maps.Map(document.getElementById('map-search'), {
+          center: {lat: 41.8688, lng: 2.2195},
+          zoom: 1,
+          mapTypeId: 'roadmap'
+        });      
+
+        // Create the search box and link it to the UI element.
+        var input = document.getElementById('pac-input');
+        var searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+
+        var markers = [];
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          }
+
+          // Clear out the old markers.
+          markers.forEach(function(marker) {
+            marker.setMap(null);
+          });
+          markers = [];
+
+          // For each place, get the icon, name and location.
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+            var icon = {
+              url: place.icon,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(25, 25)
+            };
+
+            markers.push(new google.maps.Marker({
+              map: map,
+              icon: icon,
+              title: place.name,
+              position: place.geometry.location
+            }));
+             spotLng  = place.geometry.viewport.b.b;
+             spotLat  = place.geometry.viewport.f.b;
+             spotName = place.name + " " + place.formatted_address;
+
+//              console.log( `spot longitude : ${place.geometry.viewport.b.b}
+// spot latitude : ${place.geometry.viewport.f.b}`)
+
+            if (place.geometry.viewport) {
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          map.fitBounds(bounds);
+        });
+      }
+
+
+  </script>
+
+
+<div class="form-group">
+  <button class="btn btn-success"type="submit">Submit</button>
+</div>
+</form>
+
+
+     <script src="https://maps.googleapis.com/maps/api/js?key=<%=mapsApiKey%>&libraries=places&callback=initAutocomplete"></script>
+
+     
+<!--  <%= global.INTERESTS%>  -->

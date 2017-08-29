@@ -119,7 +119,7 @@ const global   = require('../global')
 
 
 User
-.findOneAndUpdate({username: "Leonidas"}, {$set:{userSpots:"59937de063ab22bdce82c4e9"}}, {new: true}, 
+.findOneAndUpdate({username: "God"}, {$push:{userSpots:"59937de063ab22bdce82c4e9"}}, {new: true}, 
 (err, doc) =>{
   if (err) {console.log(err);} else {console.log(doc);}
 })
