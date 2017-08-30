@@ -97,20 +97,28 @@ $(document).ready(function() {
 
   // handler for the new spot form
 
-  $('#spot_form').submit(function(){
-   
+  $('#spot_form').submit(function(e){
+   if ($('#spot-latitude').val() && $('#spot-longitude').val() === "undefined") {
+     e.preventDefault()
+     $('.no-loc').remove();
+     $('.make-spot').prepend(`<p class="alert alert-danger no-loc"> <strong>You need to select a location for your spot</strong></p>`);
+   } else {
+     $(this).find(':submit').attr('disabled','disabled');
+   }
   });
   
   // shows a google maps for the user to search an existing location
 
   $('#existing-location').click(function(e){
+    $('.no-loc').remove();
     $('.existing-loc').removeClass('hidden');
     $('#google_map').addClass('hidden');
     $('.alert-loc-saved').remove();
-    $('#save-existing-location').show()
+    $('#save-existing-location').show();
   })
 
   $('#save-existing-location').click(function(e){
+    $('.no-loc').remove();
     $('#spot-latitude').val(spotLat);
     $('#spot-longitude').val(spotLng);
     if (spotLat || spotLng !== undefined) {
@@ -133,6 +141,7 @@ $(document).ready(function() {
    .prepend('<i class="fa fa-refresh fa-spin"></i> Searching...')
    .prop('disabled', true);
    $('.existing-loc').addClass('hidden');
+   $('.no-loc').remove();
 
  if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(function (position) {
@@ -149,6 +158,7 @@ $(document).ready(function() {
       .prepend('Use current location')
       $('.use-current-location').append('<p class="alert alert-success alert-loc-saved"><strong>Spot location saved</strong></p>')
       $('#google_map').removeClass('hidden');
+      
       
 
       function currentLocation() {

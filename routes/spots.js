@@ -5,10 +5,15 @@ const Spot      = require('../models/spot');
 const passport  = require('passport');
 const multer    = require('multer');
 const global    = require('../global')
-const { ensureLoggedIn, ensureLoggedOut } = require('connect-ensure-login');
+const {ensureLoggedIn,ensureLoggedOut } = require('connect-ensure-login');
+const {authorizeSpot,checkOwnership} = require('../middleware/spot-authorization');
+
+
+  ///////////////////////
+ ////// Middleware /////
+///////////////////////
 
 //  Multer 
-
 // Function to filter images extension
 const imageFilter = function (req, file, cb) {
     if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
@@ -29,18 +34,13 @@ var storage = multer.diskStorage({
 
 let upload = multer({ storage:storage, fileFilter: imageFilter });
 
-
-
-
-
-
-
-
-
+  ///////////////////////
+ //////// CRUD /////////
+///////////////////////
 
 router.get('/new-spot', ensureLoggedIn(), (req, res, next) => {
     let mapsApiKey = process.env.GOOGLE_MAPS_API_KEY;
-    res.render('edit/new_spot', {global : global, mapsApiKey: mapsApiKey});
+    res.render('edit/new_spot', {global, mapsApiKey});
 });
 
 router.post('/new-spot', upload.single('mainImage'), ensureLoggedIn(),
@@ -73,79 +73,79 @@ router.post('/new-spot', upload.single('mainImage'), ensureLoggedIn(),
   category    : req.body.category,
   location    : spotLocation
   });
-console.log(newSpot);
+    // console.log(newSpot);
   newSpot.save((err, spot) => {
     if (err) { 
-      console.log(err);
-    }else {
-      console.log("+++++++++++++////////++++++++");
-      console.log(spot.creator)
-      console.log(spot._id)
+      // console.log(err);
+      let message = "There was an error creating the spot, please try again later"
+      res.render('edit/new_spot', {global : global, 
+                                   mapsApiKey: mapsApiKey,
+                                   message });
+    } else {
+      // console.log("+++++++++++++////////++++++++");
+      // console.log(spot.creator)
+      // console.log(spot._id)
       User.findOneAndUpdate({_id: spot.creator}, {$push:{userSpots : spot._id}}, {new: true}, function(err, doc){
-    if(err){
-        console.log("Something wrong when updating data!");
-    } 
-    console.log(doc);
+    if(err){console.log("Something wrong happened while updating your data!");} 
+    // console.log(doc);
 }); 
-      res.redirect("/your-spots");
-      console.log("*************** success!!! ***********");
-    }
-  });
-
-
+  res.redirect(`/spot/${newSpot._id}`);
+  console.log("*************** success!!! ***********");
+   }
+});
 });
 
-router.get('/edit-spot', ensureLoggedIn(), (req, res, next) => {
-    res.render('edit/edit_spot', {global : global});
+
+
+router.get('/edit-spot/:id', ensureLoggedIn(), authorizeSpot, (req, res, next) => {
+   // TODO find the spot and show form with info
+  let mapsApiKey = process.env.GOOGLE_MAPS_API_KEY;
+  res.render('edit/edit_spot', {global,mapsApiKey});
 });
 
+
+router.get('/delete/:id', ensureLoggedIn(), authorizeSpot, (req, res, next) => {
+  // TODO DELETE spot ajax!!
+    res.redirect('/your-spots');
+});
 
   ///////////////////////
  ////// just show //////
 ///////////////////////
 
+router.get('/spot/:id', checkOwnership, (req, res, next) => {
+
+  Spot.findById(req.params.id, (err, spot) => {
+    if (err){ return next(err);} 
+    spot.populate('creator', (err, spot) => {
+      if (err){ return next(err); }
+      let mapsApiKey = process.env.GOOGLE_MAPS_API_KEY;
+      return res.render('show/spot', { spot, mapsApiKey});
+    });
+  });
+});
 
 router.get('/your-spots', ensureLoggedIn(), (req, res, next) => {
 
 User
-.findOne({ _id: req.user._id })
+.findById(req.user._id)
 .populate('userSpots', 'name _id country continent creator mainImage')
 .exec((err, userSpot) => {
-  console.log(userSpot);
+   if (err) {return next(err);} 
    res.render('edit/your_spots',{userSpot: userSpot.userSpots});
-    if (err) {return (err);} 
-    else {return console.log('**** OK ****');
-    }
   });
-
-
-// Getting the creator info 
-// Spot
-// .findOne({ _id: '59937de063ab22bdce82c4e9'})
-// .populate('creator','username userInfo',)
-// .exec((err, user) => {
-//   res.render('edit/your_spots',{user: user});
-//     if (err) {return (err);} 
-//     else {
-//       return console.log(user);     
-//     }   
-//   });
-    
 });
 
 router.get('/fav-spots', ensureLoggedIn(), (req, res, next) => {
-    res.render('show/fav_spots');
+  User
+  .findById(req.user._id)
+  .populate('favouriteSpots')
+  .exec((err, favSpots) => {
+    if (err) {return next(err);} 
+    res.render('show/fav_spots',{favSpots});
+    });
+  // res.render('show/fav_spots');
 });
-
-
-
-  ///////////////////////
- ////// Middleware /////
-///////////////////////
-
-
-
-
 
 
 module.exports = router;

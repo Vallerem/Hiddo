@@ -29,5 +29,37 @@ var storage = multer.diskStorage({
 
 let upload = multer({ storage:storage, fileFilter: imageFilter });
 
+router.get('/user/:username', (req, res, next) => {
+  User.findOne({username:req.params.username}, (err, user) => {
+    if (user === null) {
+      return res.redirect('/')
+    }
+    if (err){ return res.redirect('/'); }
+    user.populate('userSpots', (err, user) => {
+      if (err){ return res.redirect('/'); }
+      return res.render('show/user', { user });
+    });
+  });
+});
+
+
+router.get('/profile', ensureLoggedIn(), (req, res, next) => {
+  res.render('edit/edit_profile');
+});
+router.post('/profile', ensureLoggedIn(), (req, res, next) => {
+  
+});
+
+router.post('/update-avatar', upload.single('imgUrl'), ensureLoggedIn(), (req, res, next) => {
+  
+});
+
+router.get('user/:id/delete', ensureLoggedIn(), (req, res, next) => {
+
+  res.redirect('/')
+});
+
+
+
 
 module.exports = router;

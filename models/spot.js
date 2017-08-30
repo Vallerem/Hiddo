@@ -4,8 +4,8 @@ const User     = require('./user');
 const global   = require('../global')
 
 const spotSchema = new Schema({
-  creator     : { type: Schema.ObjectId, ref: 'User', required: true  },
-  name        : { type: String, required: true },
+  creator     : { type: Schema.ObjectId, ref:'User', required:true, unique:true  },
+  name        : { type: String, required: true, unique:true },
   mainImage   : { type: String, default: "/images/default_spot.jpg"  },
   spotInfo    : {
      introduction : { type: String, required: true},
@@ -23,6 +23,9 @@ const spotSchema = new Schema({
 
 spotSchema.index({ location: '2dsphere' });
 
+spotSchema.methods.belongsTo = function(user){
+  return this.creator.equals(user._id);
+}
 
 
 const Spot = mongoose.model('Spot', spotSchema);

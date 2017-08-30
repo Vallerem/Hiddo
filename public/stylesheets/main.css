@@ -494,13 +494,11 @@ div .form-check {
   margin: 0 3px 0 0;
 }
 
-.alert-loc-saved, .alert-no-loc {
+.alert-loc-saved, .alert-no-loc, .make-spot {
   display: inline-block;
   margin: 5px 0 5px 0;
 }
 
-/* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
 #map-search {
   height: 400px;
   width: 800px;

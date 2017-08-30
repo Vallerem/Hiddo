@@ -5,7 +5,7 @@
 
   <div class="form-group">
     <label for="name"><strong>Spot name</strong></label>
-    <input type="text" name="name" class="form-control" id="spot-name" required>
+    <input type="text" name="name" class="form-control" id="spot-name" maxlength="60" required>
   </div>
 
   <div class="country_form">
@@ -65,9 +65,9 @@
     <small id="fileHelp" class="form-text text-muted">Only : jpg/jpeg/png/gif)</small>
   </div>
 
-  <input type="hidden" for="latitude" id="spot-latitude" name="latitude" value="" required>
+  <input type="hidden" for="latitude" id="spot-latitude" name="latitude" value="undefined" required>
 
-  <input type="hidden" for="longitude" id="spot-longitude" name="longitude" value="" required>
+  <input type="hidden" for="longitude" id="spot-longitude" name="longitude" value="undefined" required>
 
 
 <h3>Spot location</h3>
@@ -83,12 +83,13 @@
 
 
   
-
+<div class"form-group">
 <button class="btn btn-primary" type="button" id="existing-location">
   Use an existing or near location</button>
-
-  <button class="btn btn-success" type="button" id="save-existing-location">
+ <button class="btn btn-success" type="button" id="save-existing-location">
   Save chosen location</button>
+</div>
+
 
 <div class="existing-loc">
  <input id="pac-input" class="controls" type="text" placeholder="Search Location">
@@ -173,7 +174,7 @@
   </script>
 
 
-<div class="form-group">
+<div class="form-group make-spot">
   <button class="btn btn-success"type="submit">Submit</button>
 </div>
 </form>
