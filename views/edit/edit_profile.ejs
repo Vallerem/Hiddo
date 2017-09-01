@@ -1,0 +1,312 @@
+
+<h1>Update your profile</h1>
+
+<div class="row">
+  <div class="col-12 col-md-3 col-lg-3">
+    
+
+<img class="img-fluid user-img" width="100%"src="<%= currentUser.imgUrl%>" alt="<% currentUser.username%>">
+
+<form action="/avatar-img" method="post" id="update-img" enctype="multipart/form-data">
+    <input type="hidden" name="old_imgUrl" id="oldImg" value="<%= currentUser.imgUrl%>">
+  <div class="form-group avatar_img">
+    <label for="imgURL"><strong>Update image</strong></label>
+    <input name ="imgUrl" type="file" class="form-control-file col-sm-12 img_upload" id="newImg" aria-describedby="fileHelp" required>
+    <small id="fileHelp" class="form-text text-muted">Only : jpg/jpeg/png/gif)</small>
+  </div>
+ <button type="submit" class="btn btn-success update-image">Update Image</button> 
+</form>
+
+<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+  &times; Delete account 
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete account</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h4><strong>Are you sure you want to delete this account?</strong></h3>
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <form action="/user/delete" method="post">   
+        <input type="hidden" name="userId" value="<%= currentUser._id %>">
+          <button class="btn btn-danger" type="submit">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+
+
+
+<div class="col-12 col-md-9 col-lg-9">
+
+
+
+<form action="/profile" method="POST" class="update_user" id="update_user_form">
+
+  <div class="form-group">
+    <label for="Mail"><strong>New email address</strong></label>
+    <input type="mail" name="email" class="form-control" id="mailu" placeholder="<%= currentUser.email%>" value="<%= currentUser.email%>">
+  </div>
+
+<div class="row">
+  <div class="form-group col-12 col-md-6 col-lg-6">
+      <label for="Password"><strong>Current password</strong></label>
+      <input name="old_password" type="password" class="form-control" id="current-password">
+        <% if (typeof message !== "undefined") { %>
+    		<p style="margin-top:5px;" class="alert alert-danger"><%= message %></p>
+  		 <% } %>
+
+  </div>
+  <div class="form-group col-12 col-md-6 col-lg-6 new-pas">
+      <label for="Password"><strong>New password</strong></label>
+      <input name="password" type="password" class="form-control" id="new-password">
+  </div>
+</div>
+
+
+ <div class="form-group">
+    <label for="Description"><strong>New description</strong></label>
+    <textarea name="description" class="form-control" id="exampleTextarea" rows="4"><%= currentUser.userInfo.description%></textarea>
+  </div>
+
+<div class="country_form">
+  <label class="mr-sm-2" for="inlineFormCustomSelect"><strong>Country</strong></label>
+  <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="country" name="countrySelected">
+  <option selected><%= currentUser.userInfo.country%></option>
+    <% countries.forEach( (country) => { %>
+    <option name="country" value="<%=country %>"><%=country %></option>
+    <%}); %>
+  </select>
+  </div>
+
+
+
+
+
+<h5><strong>Your interests</strong> </h5>
+
+<div class="row">   
+    <span class="button-checkbox col-12 col-sm-6 col-md-4">
+        <button type="button" data-color="primary"
+        <% if (interests.includes("Romantic")) {%>
+          class="btn check_interests state-icon btn-primary active" 
+        <% } else {%>
+          class="btn check_interests" 
+        <% };%>
+        >
+        <strong>Romantic</strong></button>      
+        <input type="checkbox" class="hidden" name="romantic" value="Romantic"
+          <% if (interests.includes("Romantic")) {%>
+          checked
+          <%};%> 
+          />
+    </span>
+
+     <span class="button-checkbox col-12 col-sm-6 col-md-4">
+        <button type="button" data-color="primary"
+        <% if (interests.includes("Landscape")) {%>
+          class="btn check_interests state-icon btn-primary active" 
+        <% } else {%>
+          class="btn check_interests" 
+        <% };%>
+        >
+        <strong>Landscape</strong></button>      
+        <input type="checkbox" class="hidden" name="landscape" value="Landscape"
+          <% if (interests.includes("Landscape")) {%>
+          checked
+          <%};%> 
+          />
+    </span>
+
+    <span class="button-checkbox col-12 col-sm-6 col-md-4">
+        <button type="button" data-color="primary"
+        <% if (interests.includes("Beach")) {%>
+          class="btn check_interests state-icon btn-primary active" 
+        <% } else {%>
+          class="btn check_interests" 
+        <% };%>
+        >
+        <strong>Beach</strong></button>      
+        <input type="checkbox" class="hidden" name="beach" value="Beach"
+          <% if (interests.includes("Beach")) {%>
+          checked
+          <%};%> 
+          />
+    </span>
+
+    <span class="button-checkbox col-12 col-sm-6 col-md-4">
+        <button type="button" data-color="primary"
+        <% if (interests.includes("Gastronomy")) {%>
+          class="btn check_interests state-icon btn-primary active" 
+        <% } else {%>
+          class="btn check_interests" 
+        <% };%>
+        >
+        <strong>Gastronomy</strong></button>      
+        <input type="checkbox" class="hidden" name="gastronomy" value="Gastronomy"
+          <% if (interests.includes("Gastronomy")) {%>
+          checked
+          <%};%> 
+          />
+    </span>
+
+    <span class="button-checkbox col-12 col-sm-6 col-md-4">
+        <button type="button" data-color="primary"
+        <% if (interests.includes("Historic")) {%>
+          class="btn check_interests state-icon btn-primary active" 
+        <% } else {%>
+          class="btn check_interests" 
+        <% };%>
+        >
+        <strong>Historic</strong></button>      
+        <input type="checkbox" class="hidden" name="historic" value="Historic"
+          <% if (interests.includes("Historic")) {%>
+          checked
+          <%};%> 
+          />
+    </span>
+    
+    <span class="button-checkbox col-12 col-sm-6 col-md-4">
+        <button type="button" data-color="primary"
+        <% if (interests.includes("Abandoned")) {%>
+          class="btn check_interests state-icon btn-primary active" 
+        <% } else {%>
+          class="btn check_interests" 
+        <% };%>
+        >
+        <strong>Abandoned</strong></button>      
+        <input type="checkbox" class="hidden" name="abandoned" value="Abandoned"
+          <% if (interests.includes("Abandoned")) {%>
+          checked
+          <%};%> 
+          />
+    </span>
+
+    <span class="button-checkbox col-12 col-sm-6 col-md-4">
+        <button type="button" data-color="primary"
+        <% if (interests.includes("Peacefull")) {%>
+          class="btn check_interests state-icon btn-primary active" 
+        <% } else {%>
+          class="btn check_interests" 
+        <% };%>
+        >
+        <strong>Peacefull</strong></button>      
+        <input type="checkbox" class="hidden" name="peacefull" value="Peacefull"
+          <% if (interests.includes("Peacefull")) {%>
+          checked
+          <%};%> 
+          />
+    </span>
+    
+    <span class="button-checkbox col-12 col-sm-6 col-md-4">
+        <button type="button" data-color="primary"
+        <% if (interests.includes("Night")) {%>
+          class="btn check_interests state-icon btn-primary active" 
+        <% } else {%>
+          class="btn check_interests" 
+        <% };%>
+        >
+        <strong>Night</strong></button>      
+        <input type="checkbox" class="hidden" name="night" value="Night"
+          <% if (interests.includes("Night")) {%>
+          checked
+          <%};%> 
+          />
+    </span>
+    
+    <span class="button-checkbox col-12 col-sm-6 col-md-4">
+        <button type="button" data-color="primary"
+        <% if (interests.includes("Nature")) {%>
+          class="btn check_interests state-icon btn-primary active" 
+        <% } else {%>
+          class="btn check_interests" 
+        <% };%>
+        >
+        <strong>Nature</strong></button>      
+        <input type="checkbox" class="hidden" name="nature" value="Nature"
+          <% if (interests.includes("Nature")) {%>
+          checked
+          <%};%> 
+          />
+    </span>
+
+    <span class="button-checkbox col-12 col-sm-6 col-md-4">
+        <button type="button" data-color="primary"
+        <% if (interests.includes("Mysterious")) {%>
+          class="btn check_interests state-icon btn-primary active" 
+        <% } else {%>
+          class="btn check_interests" 
+        <% };%>
+        >
+        <strong>Mysterious</strong></button>      
+        <input type="checkbox" class="hidden" name="mysterious" value="Mysterious"
+          <% if (interests.includes("Mysterious")) {%>
+          checked
+          <%};%> 
+          />
+    </span>
+
+      <span class="button-checkbox col-12 col-sm-6 col-md-4">
+        <button type="button" data-color="primary"
+        <% if (interests.includes("Folklore")) {%>
+          class="btn check_interests state-icon btn-primary active" 
+        <% } else {%>
+          class="btn check_interests" 
+        <% };%>
+        >
+        <strong>Folklore</strong></button>      
+        <input type="checkbox" class="hidden" name="folklore" value="Folklore"
+          <% if (interests.includes("Folklore")) {%>
+          checked
+          <%};%> 
+          />
+    </span>
+    
+     <span class="button-checkbox col-12 col-sm-6 col-md-4">
+        <button type="button" data-color="primary"
+        <% if (interests.includes("Urban")) {%>
+          class="btn check_interests state-icon btn-primary active" 
+        <% } else {%>
+          class="btn check_interests" 
+        <% };%>
+        >
+        <strong>Urban</strong></button>      
+        <input type="checkbox" class="hidden" name="urban" value="Urban"
+          <% if (interests.includes("Urban")) {%>
+          checked
+          <%};%> 
+          />
+    </span>
+</div>
+
+
+<div class="form-group">
+  <button class="signup-submit but btn-success btn-lg" type="submit">Update profile</button>
+</div>
+</form>
+
+
+</div>
+
+
+
+
+</div>
+
+
+

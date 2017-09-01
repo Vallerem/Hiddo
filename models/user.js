@@ -4,7 +4,7 @@ const Spot     = require('./spot');
 const global   = require('../global')
 
 const userSchema = new Schema({
-  username           : { type: String, required: true, unique: true, trim: true },
+  username           : { type: String, required: true, unique: true, trim: true,                          minlength: 3, maxlength: 15},
   email              : { type: String, required: true, unique: true },
   password           : { type: String, required: true },
   userInfo: {

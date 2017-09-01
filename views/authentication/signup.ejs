@@ -3,7 +3,7 @@
 <form action="/signup" method="POST" class="signup_form" id="signup_form" enctype="multipart/form-data">
     <div class="form-group">
     <label for="Username"><strong>User name</strong></label>
-    <input type="text" name="username" class="form-control" id="username"  required>
+    <input type="text" name="username" class="form-control" id="username"  required minlength="3" maxlength="15">
   </div>
   <div class="form-group">
     <label for="Mail"><strong>Email address</strong></label>
@@ -42,7 +42,7 @@
 
     <span class="button-checkbox col-12 col-sm-6 col-md-4">
         <button type="button" class="btn check_interests" data-color="primary"><strong>Beach</strong></button>
-        <input type="checkbox" class="hidden" name="beach" value="Romantic"/>
+        <input type="checkbox" class="hidden" name="beach" value="Beach"/>
     </span>
 
     <span class="button-checkbox col-12 col-sm-6 col-md-4">

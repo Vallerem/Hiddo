@@ -78,9 +78,7 @@ router.post('/new-spot', upload.single('mainImage'), ensureLoggedIn(),
     if (err) { 
       // console.log(err);
       let message = "There was an error creating the spot, please try again later"
-      res.render('edit/new_spot', {global : global, 
-                                   mapsApiKey: mapsApiKey,
-                                   message });
+      res.render('edit/new_spot', {global, mapsApiKey, message });
     } else {
       // console.log("+++++++++++++////////++++++++");
       // console.log(spot.creator)
@@ -96,17 +94,28 @@ router.post('/new-spot', upload.single('mainImage'), ensureLoggedIn(),
 });
 
 
-
 router.get('/edit-spot/:id', ensureLoggedIn(), authorizeSpot, (req, res, next) => {
-   // TODO find the spot and show form with info
-  let mapsApiKey = process.env.GOOGLE_MAPS_API_KEY;
-  res.render('edit/edit_spot', {global,mapsApiKey});
+  Spot
+  .findById(req.params.id)
+  .populate('creator')
+  .exec((err, spot) => {
+    if (err) {return next(err);} 
+      let mapsApiKey = process.env.GOOGLE_MAPS_API_KEY;
+      res.render('edit/edit_spot', {spot,global,mapsApiKey});
+  });  
 });
 
+router.post('/edit-spot', ensureLoggedIn(), (req, res, next) => {
+  
+}); 
 
-router.get('/delete/:id', ensureLoggedIn(), authorizeSpot, (req, res, next) => {
-  // TODO DELETE spot ajax!!
+
+router.post('/spot/delete', ensureLoggedIn(), (req, res, next) => {
+  let spotId = req.body.spotId || req.query.spotId;
+   Spot.findByIdAndRemove(spotId, (err, spot) => {
+    if (err){ return next(err);}
     res.redirect('/your-spots');
+  });
 });
 
   ///////////////////////
@@ -114,23 +123,25 @@ router.get('/delete/:id', ensureLoggedIn(), authorizeSpot, (req, res, next) => {
 ///////////////////////
 
 router.get('/spot/:id', checkOwnership, (req, res, next) => {
-
-  Spot.findById(req.params.id, (err, spot) => {
-    if (err){ return next(err);} 
-    spot.populate('creator', (err, spot) => {
+  Spot
+  .findById(req.params.id)
+  .populate('creator') 
+  .exec((err, spot) => {
+      console.log(`*****************************
+      ********
+      **********************`);
+      console.log(spot);
       if (err){ return next(err); }
       let mapsApiKey = process.env.GOOGLE_MAPS_API_KEY;
       return res.render('show/spot', { spot, mapsApiKey});
     });
   });
-});
 
 router.get('/your-spots', ensureLoggedIn(), (req, res, next) => {
-
-User
-.findById(req.user._id)
-.populate('userSpots', 'name _id country continent creator mainImage')
-.exec((err, userSpot) => {
+  User
+  .findById(req.user._id)
+  .populate('userSpots', 'name _id country continent creator mainImage')
+  .exec((err, userSpot) => {
    if (err) {return next(err);} 
    res.render('edit/your_spots',{userSpot: userSpot.userSpots});
   });
@@ -140,11 +151,10 @@ router.get('/fav-spots', ensureLoggedIn(), (req, res, next) => {
   User
   .findById(req.user._id)
   .populate('favouriteSpots')
-  .exec((err, favSpots) => {
+  .exec((err, user) => {
     if (err) {return next(err);} 
-    res.render('show/fav_spots',{favSpots});
+    res.render('show/fav_spots',{favSpots:user.favouriteSpots });
     });
-  // res.render('show/fav_spots');
 });
 
 

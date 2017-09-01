@@ -4,3 +4,7 @@
 
 <p>ID: <%= spot._id%></p>
 <p>Create by: <%= spot.creator.username%></p>
+
+<% if (campaignIsCurrentUsers) {%>
+  <a href="/edit-spot/<%= spot._id %>" class="btn btn-success">Update spot</a>
+<%}%>

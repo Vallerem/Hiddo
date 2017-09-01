@@ -7,7 +7,11 @@ function resize() {
   $(window).resize(resize);
   resize();
 
+  
+
 $(document).ready(function() {
+
+
 
   // changes the position of the user dropdown
 
@@ -25,12 +29,20 @@ $(document).ready(function() {
   var pathname = window.location.pathname;
   $('.navbar-nav > li > a[href="' + pathname + '"]').parent().addClass('active');
 
+  // Invalidates using space bar on login / logout
+  $('.main input[type=text], .main input[type=password], #signup_form #username ,      #signup_form #mail, #signup_form #password')
+      .on('keypress', function(e) {
+        if (e.which == 32)
+            return false;
+  });
+  
   // Form data handler for checkboxes on signup
   $("#signup_form").submit(function(event) {
     if ($('span.button-checkbox  :checkbox:checked').length <= 0) {
       event.preventDefault();
       $('div .alert-danger').remove();
       $('.avatar_img').prepend('<div class="alert alert-danger" role="alert"><strong>Hey, listen!</strong>  Please, select at least 1 interest.</div>');
+      $("#signup_form").unbind("submit", preventDefault);
     }
   });
 
@@ -195,10 +207,47 @@ $(document).ready(function() {
 }
  });
 
+  // Update user image (ajax call)
+  $('.update-image').on('submit', function(e){
+    e.preventDefault()
 
+    let fd = new FormData();    
+    fd.append('userfile', $('#newImg')[0].files[0]);
 
+    let data = {
+      oldImg: $('#oldImg').val() ,
+      newImg: fd
+    } 
 
+    $.ajax({
+      url: "/avatar-img",
+      data: data,
+      type: 'POST',
+      processData: false,
+      contentType: false,
+      dataType: "json",
+      cache : false,
+      success: function (response) {  
+        console.log(response);
+        $(body).append(response);
+      },
+      error: function (response) {
+        console.log('ERROR updating image');
+      }
+    }); 
+  });
 
+  // Form handler for profile update
+  $('#update_user_form').on('click', function(e){
+    if ($('#new-password').val().length > 0 
+        && $('#current-password').val().length <= 0 ) {
+      e.preventDefault()
+      $('.alert-pas').remove();
+      $('.new-pas').append('<p style="margin-top: 5px;" class="alert-pas alert alert-warning">Enter your current password to update</p>');
+    } 
+  });
+
+  // POPUP
 
 
 

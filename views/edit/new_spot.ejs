@@ -1,3 +1,6 @@
+<%if (typeof message !== "undefined") {%>
+  <p class="alert alert danger"><%= message%></p>
+<%}%>
 
 <form class="spot_form" id="spot_form" action="/new-spot" method="post" enctype="multipart/form-data">
 

@@ -4,7 +4,7 @@ const User     = require('./user');
 const global   = require('../global')
 
 const spotSchema = new Schema({
-  creator     : { type: Schema.ObjectId, ref:'User', required:true, unique:true  },
+  creator     : { type: Schema.ObjectId, ref:'User', required:true},
   name        : { type: String, required: true, unique:true },
   mainImage   : { type: String, default: "/images/default_spot.jpg"  },
   spotInfo    : {
