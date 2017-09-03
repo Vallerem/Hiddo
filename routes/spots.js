@@ -5,6 +5,7 @@ const Spot      = require('../models/spot');
 const passport  = require('passport');
 const multer    = require('multer');
 const global    = require('../global')
+const fs        = require('fs');
 const {ensureLoggedIn,ensureLoggedOut } = require('connect-ensure-login');
 const {authorizeSpot,checkOwnership} = require('../middleware/spot-authorization');
 
@@ -107,14 +108,73 @@ router.get('/edit-spot/:id', ensureLoggedIn(), authorizeSpot, (req, res, next) =
 
 router.post('/edit-spot', ensureLoggedIn(), (req, res, next) => {
   
+  let spotID = req.body.spot_id; 
+
+  let spotLocation = {
+    type: "Point",
+    coordinates: [req.body.longitude, req.body.latitude]
+  };
+
+  const updatedSpot = {
+  name        : req.body.name,
+  spotInfo    : {
+     introduction : req.body.introduction,
+     description  : req.body.description,
+     howToArrive  : req.body.howToArrive,
+     tips         : req.body.tips,
+    },
+  continent   : req.body.continent,
+  country     : req.body.country,
+  category    : req.body.category,
+  location    : spotLocation
+  };
+  
+  Spot.findByIdAndUpdate(spotID, updatedSpot, {new: true},(err, user) => {
+      if (err){ 
+            return next(err);
+          } else {
+            console.log(user);
+            res.redirect(`/spot/${spotID}`);
+        }
+    });  
+});
+
+
+router.post('/spot-img', ensureLoggedIn(), upload.single('mainImage'), (req, res, next) => {
+
+  let spotId = req.body.spot_id
+  let oldImg = `./public/${req.body.old_imgUrl}`;
+  let newImg = `/uploads/spots/${req.file.filename}`;
+
+   Spot.findByIdAndUpdate(spotId, {$set:{mainImage:newImg}}, {new: true}, 
+   (err, spot) => {
+    if (err){ return next(err);}
+      // console.log(spot);
+      fs.stat(oldImg, (err, stats) => {
+        if (err) {
+            return console.error(err);
+        }
+        if (oldImg === './public//images/default_spot.png') {
+          return res.redirect(`/edit-spot/${spotId}`);
+        }
+        fs.unlink(oldImg,(err) => {
+        if(err) return console.log(err);
+        console.log('file deleted successfully');
+        res.redirect(`/edit-spot/${spotId}`);
+      });  
+    });
+  });  
 }); 
 
 
 router.post('/spot/delete', ensureLoggedIn(), (req, res, next) => {
-  let spotId = req.body.spotId || req.query.spotId;
-   Spot.findByIdAndRemove(spotId, (err, spot) => {
-    if (err){ return next(err);}
-    res.redirect('/your-spots');
+  let spotId = req.body.spotId;
+  User.update({ _id: req.user._id }, { "$pull": { "userSpots": spotId} }, { safe: true, multi:true }, (err, elem) => {
+    if (err){ return next(err);} 
+      Spot.findByIdAndRemove(spotId, (err, spot) => {
+      if (err){ return next(err);} 
+      res.redirect('/your-spots');
+    });
   });
 });
 

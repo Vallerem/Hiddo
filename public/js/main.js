@@ -7,15 +7,9 @@ function resize() {
   $(window).resize(resize);
   resize();
 
-  
-
 $(document).ready(function() {
 
-
-
   // changes the position of the user dropdown
-
-
   /// Make the footer position great again
   var docHeight = $(window).height();
   var footerHeight = $('#footer').height();
@@ -109,7 +103,7 @@ $(document).ready(function() {
 
   // handler for the new spot form
 
-  $('#spot_form').submit(function(e){
+  $('#spot_form, #update-spot').submit(function(e){
    if ($('#spot-latitude').val() && $('#spot-longitude').val() === "undefined") {
      e.preventDefault()
      $('.no-loc').remove();
@@ -171,8 +165,6 @@ $(document).ready(function() {
       $('.use-current-location').append('<p class="alert alert-success alert-loc-saved"><strong>Spot location saved</strong></p>')
       $('#google_map').removeClass('hidden');
       
-      
-
       function currentLocation() {
       var userLocation = {
         lat: center.lat, 
@@ -181,7 +173,8 @@ $(document).ready(function() {
         document.getElementById('google_map'), 
         {
           zoom: 16,
-          center: userLocation
+          center: userLocation,
+          mapTypeId: 'hybrid'
         }
       );
         var userMarker = new google.maps.Marker({
@@ -197,15 +190,19 @@ $(document).ready(function() {
     },
   }); 
 }
-  currentLocation();
-    
-  }, function () {
+  currentLocation();}, function () {
     alert('Error in the geolocation service.');
+    });
+    } else {
+      alert('Browser does not support geolocation.');
+    }
   });
-} else {
-  alert('Browser does not support geolocation.');
-}
- });
+
+
+
+
+
+
 
   // Update user image (ajax call)
   $('.update-image').on('submit', function(e){
@@ -248,7 +245,7 @@ $(document).ready(function() {
   });
 
   // POPUP
-
+ 
 
 
 

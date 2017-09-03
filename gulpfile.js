@@ -17,9 +17,9 @@ gulp.task('browserSync', function() {
 });
 
 gulp.task('dev', ['browserSync', 'uglify'], function() {
-    gulp.watch('public/js/main.js', ['uglify']);
-    gulp.watch('views/*.ejs', browserSync.reload);
-    gulp.watch('public/**/*.ejs', browserSync.reload);
+    gulp.watch('public/js/main.js', gulp.parallel('uglify','browserSync'));
+    gulp.watch('views/**/*.ejs', browserSync.reload);
+    gulp.watch('public/stylesheets/*.scss', browserSync.reload);
 });
 
  

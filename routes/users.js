@@ -107,7 +107,7 @@ router.post('/profile', ensureLoggedIn(), (req, res, next) => {
     });  
 });
 
-router.post('/avatar-img', upload.single('imgUrl'), ensureLoggedIn(), (req, res, next) => {
+router.post('/avatar-img',ensureLoggedIn(), upload.single('imgUrl'), (req, res, next) => {
   
   let oldImg = `./public/${req.body.old_imgUrl}`;
   let newImg = `/uploads/${req.file.filename}`;

@@ -23,7 +23,7 @@ mongoose.connect(process.env.MONGODB_URI);
 const index      = require('./routes/index');
 const authRoutes = require('./routes/authentication');
 const spotRoutes = require('./routes/spots') 
-const users    = require('./routes/users') 
+const users      = require('./routes/users') 
 
 
 
@@ -152,8 +152,7 @@ passport.use('local-login', new LocalStrategy((username, password, next) => {
     }
     if (!bcrypt.compareSync(password, user.password)) {
       return next(null, false, { message: "Incorrect password" });
-    }
-    
+    }   
     return next(null, user);
   });
 }));

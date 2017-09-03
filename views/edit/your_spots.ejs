@@ -3,6 +3,7 @@
   <h3><%= spot.name %></h3>
   <h2><%= spot.continent %> <small><%= spot.country %></small></h2>
   <p><strong>spot id: <i><%= spot._id %></i></strong></p>
-  <img src="<%= spot.mainImage %>" alt="spot image">
+  <img class="img-fluid" src="<%= spot.mainImage %>" alt="spot image">
+  <a href="/edit-spot/<%= spot._id %>" class="btn btn-primary">Edit Spot</a>
 <% }) %>
 

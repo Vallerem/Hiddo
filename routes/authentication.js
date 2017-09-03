@@ -44,12 +44,14 @@ router.get('/login',  ensureLoggedOut(), (req, res, next) => {
     res.render('authentication/login', { message : req.flash("error")});
 });
 
-router.post('/login', ensureLoggedOut(), passport.authenticate('local-login', {
-  successRedirect : '/',
-  failureRedirect : '/login',
-  failureFlash: true,
-  passReqToCallback: true
-}));
+router.post('/login', ensureLoggedOut(), 
+    passport.authenticate('local-login', {
+        successRedirect : '/',
+        failureRedirect : '/login',
+        failureFlash: true,
+        passReqToCallback: true
+    })
+);
 
 //// Logout
 router.post('/logout', ensureLoggedIn(), (req, res) => {

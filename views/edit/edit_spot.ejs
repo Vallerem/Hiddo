@@ -1,0 +1,284 @@
+<h1>Update: <%= spot.name%></h1>
+
+<div class="row">
+  <div class="col-12 col-md-3 col-lg-3">
+    
+
+<img class="img-fluid user-img" width="100%"src="<%= spot.mainImage%>" alt="<%= spot.mainImage%>">
+
+<form action="/spot-img" method="post" id="update-img" enctype="multipart/form-data">
+  <input type="hidden" name="old_imgUrl" id="oldImg" value="<%= spot.mainImage%>">
+  <input type="hidden" name="spot_id" id="spotID" value="<%= spot._id%>">
+  <div class="form-group spotr_img">
+    <label for="imgURL"><strong>Update image</strong></label>
+    <input name ="mainImage" type="file" class="form-control-file col-sm-12 img_upload" id="newImg" aria-describedby="fileHelp" required>
+    <small id="fileHelp" class="form-text text-muted">Only : jpg/jpeg/png/gif)</small>
+  </div>
+ <button type="submit" class="btn btn-success update-image">Update Image</button> 
+</form>
+
+
+<div id="spot-loc" style="width:100%;height:300px"></div>
+
+
+
+<div class="delete-spot">
+<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#spotModel">
+  &times; Delete Spot 
+</button>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="spotModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete spot</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h4><strong>Are you sure you want to delete this spot?</strong></h3>      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <form action="/spot/delete" method="post">   
+        <input type="hidden" name="spotId" value="<%= spot._id %>">
+          <button class="btn btn-danger" type="submit">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+<div class="col-12 col-md-9 col-lg-9">
+<%if (typeof message !== "undefined") {%>
+  <p class="alert alert danger"><%= message%></p>
+<%}%>
+
+<form class="update-spot" id="update-spot" action="/edit-spot" method="post">
+
+  <input type="hidden" class="id_form" name="spot_id" value="<%= spot._id %>" required>
+
+  <div class="form-group">
+    <label for="name"><strong>Spot name</strong></label>
+    <input type="text" name="name" class="form-control" id="spot-name" maxlength="60" value="<%= JSON.parse(JSON.stringify(spot.name))%>">
+  </div>
+
+  <div class="country_form">
+  <label class="mr-sm-2" for="inlineFormCustomSelect"><strong>Spot continent</strong></label>
+  <select class="custom-select" id="spot-continent" name="continent">
+  <option  id="selected-option" name="continent" value="<%=spot.continent %>" selected><%=spot.continent %></option>
+    <% global.CONTINENTS.forEach( (continent) => {  %>
+    <option name="continent" value="<%=continent %>"><%=continent %></option>
+      <% }); %>
+  </select>
+  </div>
+
+  <div class="country_form">
+  <label class="mr-sm-2" for="inlineFormCustomSelect"><strong>Spot country</strong></label>
+  <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="country" name="country">
+  <option name="country" value="<%=spot.country %>"><%=spot.country %></option>
+    <% global.COUNTRIES.forEach( (country) => { %>
+    <option name="country" value="<%=country %>"><%=country %></option>
+    <%}); %>
+  </select>
+  </div>
+
+  <div class="category_form">
+  <label class="mr-sm-2" for="inlineFormCustomSelect"><strong>Spot category</strong></label>
+  <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="category" name="category">
+  <option name="category" value="<%=spot.category %>"><%=spot.category %></option>
+    <% global.INTERESTS.forEach( (category) => { %>
+    <option name="category" value="<%=category %>"><%=category %></option>
+    <%}); %>
+  </select>
+  </div>
+
+
+<h2>Update information</h2>
+
+  <div class="form-group spot-intro">
+    <label for="introduction"><strong>Spot quote</strong></label>
+    <textarea name="introduction" class="form-control" id="spot-introduction" rows="2" placeholder="(Max: 100 characters)" maxlength="100"><%=spot.spotInfo.introduction%></textarea>
+  </div>
+
+
+  <div class="form-group">
+    <label for="description"><strong>Spot description</strong></label>
+    <textarea name="description" class="form-control" id="spot-description" rows="7" placeholder="Explain why is this hidden gem so unique and what you lived there"><%=spot.spotInfo.description%></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="howToArrive"><strong>Spot route / How to get there</strong></label>
+    <textarea name="howToArrive" class="form-control" id="howToArrive" rows="2" placeholder="Is there something necessary to get there?" ><%=spot.spotInfo.howToArrive%></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="tips"><strong>Tips</strong></label>
+    <textarea name="tips" class="form-control" id="tips" rows="2" placeholder="Share some wisdom!" ><%=spot.spotInfo.tips%></textarea>
+  </div>
+
+  <input type="hidden" for="latitude" id="spot-latitude" name="latitude" 
+  value="<%= JSON.stringify(spot.location.coordinates[1]) %>">
+
+  <input type="hidden" for="longitude" id="spot-longitude" name="longitude" 
+  value="<%= JSON.stringify(spot.location.coordinates[0]) %>">
+
+
+<h3>Update location</h3>
+
+  <div class="form-group use-current-location">
+  <button class="btn btn-primary" type="button" id="current-location">
+  Use current location</button>
+  
+  </div>
+
+<div id="google_map" class="hidden" style="width:800px;height:400px;">
+  </div>
+
+
+  
+<div class"form-group">
+<button class="btn btn-primary" type="button" id="existing-location">
+  Use an existing or near location</button>
+ <button class="btn btn-success" type="button" id="save-existing-location">
+  Save chosen location</button>
+</div>
+
+
+<div class="existing-loc">
+ <input id="pac-input" class="controls" type="text" placeholder="Search Location">
+ <div id="map-search"></div>
+</div>
+
+
+
+  <script>
+    var spotLat, spotLng, spotName;
+    function initAutocomplete() {
+        var map = new google.maps.Map(document.getElementById('map-search'), {
+          center: {lat: 41.8688, lng: 2.2195},
+          zoom: 1,
+          mapTypeId: 'roadmap'
+        });      
+
+        // Create the search box and link it to the UI element.
+        var input = document.getElementById('pac-input');
+        var searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+
+        var markers = [];
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          }
+
+          // Clear out the old markers.
+          markers.forEach(function(marker) {
+            marker.setMap(null);
+          });
+          markers = [];
+
+          // For each place, get the icon, name and location.
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+            var icon = {
+              url: place.icon,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(25, 25)
+            };
+
+            markers.push(new google.maps.Marker({
+              map: map,
+              icon: icon,
+              title: place.name,
+              position: place.geometry.location
+            }));
+             spotLng  = place.geometry.viewport.b.b;
+             spotLat  = place.geometry.viewport.f.b;
+             spotName = place.name + " " + place.formatted_address;
+
+//              console.log( `spot longitude : ${place.geometry.viewport.b.b}
+// spot latitude : ${place.geometry.viewport.f.b}`)
+
+            if (place.geometry.viewport) {
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          map.fitBounds(bounds);
+        });
+      }
+  </script>
+
+
+<div class="form-group make-spot">
+  <button class="btn btn-success"type="submit">Submit</button>
+</div>
+</form>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=<%=mapsApiKey%>&libraries=places&callback=initAutocomplete"></script>
+
+<script>
+var lati  = <%- JSON.stringify(spot.location.coordinates[1]) %>;
+var longi = <%- JSON.stringify(spot.location.coordinates[0]) %>;
+
+console.log(lati);
+console.log(longi);
+    // var location = {
+    //   lat: 1, 
+    //   lng: 1
+    // }
+
+    var currentMap;
+    function initMap() {
+        currentMap = new google.maps.Map(document.getElementById('spot-loc'), {
+          center: {lat: lati, lng: longi},
+          zoom: 11, 
+          mapTypeId: 'hybrid'
+        });
+
+      var spotMarker = new google.maps.Marker({
+        position: {lat: lati, lng: longi},
+        map: currentMap,
+        animation: google.maps.Animation.DROP,
+    }); 
+    var iw = new google.maps.InfoWindow({
+    content:  `<%- JSON.parse(JSON.stringify(spot.name)) %>
+     - 
+    <strong><%- JSON.parse(JSON.stringify(spot.country)) %></strong>`
+  });
+    google.maps.event.addListener(spotMarker, "click", function(e) {
+    iw.open(currentMap, this);
+  });
+  }
+
+initMap();
+</script>
+</div>
+</div>
