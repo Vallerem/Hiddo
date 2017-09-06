@@ -24,6 +24,7 @@ const index      = require('./routes/index');
 const authRoutes = require('./routes/authentication');
 const spotRoutes = require('./routes/spots') 
 const users      = require('./routes/users') 
+const show       = require('./routes/show') 
 
 
 
@@ -188,6 +189,7 @@ app.use('/', index);
 app.use('/', authRoutes);
 app.use('/', spotRoutes);
 app.use('/', users);
+app.use('/', show);
 
 ////////////////////////////////////////////////////////////////
 

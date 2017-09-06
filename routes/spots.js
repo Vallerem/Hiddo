@@ -187,10 +187,6 @@ router.get('/spot/:id', checkOwnership, (req, res, next) => {
   .findById(req.params.id)
   .populate('creator') 
   .exec((err, spot) => {
-      console.log(`*****************************
-      ********
-      **********************`);
-      console.log(spot);
       if (err){ return next(err); }
       let mapsApiKey = process.env.GOOGLE_MAPS_API_KEY;
       return res.render('show/spot', { spot, mapsApiKey});
@@ -200,7 +196,7 @@ router.get('/spot/:id', checkOwnership, (req, res, next) => {
 router.get('/your-spots', ensureLoggedIn(), (req, res, next) => {
   User
   .findById(req.user._id)
-  .populate('userSpots', 'name _id country continent creator mainImage')
+  .populate('userSpots')
   .exec((err, userSpot) => {
    if (err) {return next(err);} 
    res.render('edit/your_spots',{userSpot: userSpot.userSpots});

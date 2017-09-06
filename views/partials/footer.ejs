@@ -1,63 +1,89 @@
-<!--footer start from here-->
 
+<footer id="footer">
   <div class="container">
-    <div class="row">
-      <div class="col-md-3 col-sm-6 footer-col">
-        <div class="logofooter"> Logo</div>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.</p>
-        <p><i class="fa fa-map-pin"></i> #228, Tiruvannamalai, Tamilnadu, India</p>
-        <p><i class="fa fa-phone"></i> Phone (India) : +91 9999 999 999</p>
-        <p><i class="fa fa-envelope"></i> E-mail : info@prabuuideveloper.com</p>
-        
-      </div>
-      <div class="col-md-3 col-sm-6 footer-col">
-        <h6 class="heading7">GENERAL LINKS</h6>
-        <ul class="footer-ul">
-          <li><a href="#"> Career</a></li>
-          <li><a href="#"> Privacy Policy</a></li>
-          <li><a href="#"> Terms & Conditions</a></li>
-          <li><a href="#"> Client Gateway</a></li>
-          <li><a href="#"> Ranking</a></li>
-          <li><a href="#"> Case Studies</a></li>
-          <li><a href="#"> Frequently Ask Questions</a></li>
-        </ul>
-      </div>
-      <div class="col-md-3 col-sm-6 footer-col">
-        <h6 class="heading7">LATEST POST</h6>
-        <div class="post">
-          <p>facebook crack the movie advertisment code:what it means for you <span>August 3,2015</span></p>
-          <p>facebook crack the movie advertisment code:what it means for you <span>August 3,2015</span></p>
-          <p>facebook crack the movie advertisment code:what it means for you <span>August 3,2015</span></p>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6 footer-col">
-        <h6 class="heading7">Social Media</h6>
-        <ul class="footer-social">
-          <li><i class="fa fa-linkedin social-icon linked-in" aria-hidden="true"></i></li>
-          <li><a href=""><i class="fa fa-facebook social-icon facebook" aria-hidden="true"></a></i></li>
-          <li><i class="fa fa-twitter social-icon twitter" aria-hidden="true"></i></li>
-          <li><i class="fa fa-google-plus social-icon google" aria-hidden="true"></i></li>
-        </ul>
-      </div>
-    </div>
-  </div>
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-4 footer--info" >
+            <h1>Hiddo</h1>
+            <p class="fotfirst"><i class="fa fa-phone"></i> Phone (Spain) : +34 XXX XX XX</p>
+            <p><i class="fa fa-envelope"></i> E-mail : <a class="fotlink" href="mailto:hiddo.contact@gmail.com">hiddo.contact@gmail.com</a></p> 
 
-<div class="copyright">
-  <div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      <p>© 2016 - All Rights with prabuuideveloper</p>
+            <div style="margin-top:40px;">
+              <ul class="footer-social">
+                <li><a href=""<i class="fa fa-linkedin social-icon linked-in" aria-hidden="true"></a></i></li>
+                <li><a href=""><i class="fa fa-facebook social-icon facebook" aria-hidden="true"></a></i></li>
+                <li><a href=""<i class="fa fa-twitter social-icon twitter" aria-hidden="true"></a></i></li>
+                <li><a href=""<i class="fa fa-google-plus social-icon google" aria-hidden="true"></a></i></li>
+            </ul>
+            </div>
+            
+          </div>
+
+
+          <div class="col-12 col-sm-12 col-md-4 footer--info" >
+            <h1>Info </h1>
+
+            <p class="fotfirst">Humble creator</p>
+            <ul>
+              <li><a class="fotlink" href="https://linkedin.com/in/manuel-amaro-valle"> Linkedin</a></li>
+              <li><a class="fotlink" href="https://github.com/Vallerem">Github</a></li>
+              <li><a class="fotlink" href="https://angel.co/manuel-amaro-valle-redondo">AngelList</a> </li>
+            </ul>
+
+            <p>made with love with</p>
+            <ul>
+              <li><a class="fotlink" href="https://nodejs.org/"> Node.js</a></li>
+              <li><a class="fotlink" href="http://expressjs.com/">Express.js</a></li>
+              <li><a class="fotlink" href="https://www.mongodb.com/">MongoDB</a></li>
+              <small>and much more...</small>
+            </ul>
+          </div>
+
+
+
+          <div class="col-12 col-sm-12 col-md-4 footer--info">
+             <p style="margin-top:75px;margin-bottom:-40px;"><i class="fa fa-map-pin"></i> C/ de la piruleta 228 Barcelona</p>
+            <div id="footer--map" style="width:90%;height:200px;margin-top:70px;margin-bottom:70px"></div>
+          </div>
+          
+     </div>
+
+       </footer>
+    <div class="copyright">
+      &copy; 2017 - Hiddo. All rights reserved
     </div>
-    <div class="col-md-6">
-      <ul class="bottom_ul">
-        <li><a href="#">prabuuideveloper.com</a></li>
-        <li><a href="#">About us</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Faq's</a></li>
-        <li><a href="#">Contact us</a></li>
-        <li><a href="/sites">Site Map</a></li>
-      </ul>
-    </div>
-    </div>
-  </div>
-</div>
+ </div>
+
+
+
+
+
+
+
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFjuxIGKn2gKOZpceECIKqTln8jSp1fLI&libraries=places&callback=initAutocomplete"></script>
+
+ <script>   
+    var footerMap;
+    function initMap() {
+        footerMap = new google.maps.Map(document.getElementById('footer--map'), {
+          center: {lat: 41.387314, lng: 2.134211 },
+          zoom: 11, 
+          mapTypeId: 'roadmap'
+        });
+
+      var spotMarker = new google.maps.Marker({
+        position: {lat: 41.387314, lng: 2.134211 },
+        map: footerMap,
+    }); 
+    var iw = new google.maps.InfoWindow({
+    content: "Hiddo HQ",
+    color:"black"
+  });
+    google.maps.event.addListener(spotMarker, "click", function(e) {
+    iw.open(footerMap, this);
+  });
+  }
+
+initMap();
+ </script>

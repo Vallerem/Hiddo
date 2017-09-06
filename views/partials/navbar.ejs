@@ -6,8 +6,14 @@
         </button>    
             <a class="navbar-brand logo-hiddo" href="/">Hiddo</a>
         <div class="collapse navbar-collapse navbar-content mobile-control" id="navControl">
-            <ul class="navbar-nav ml-auto">
-                <% if (isUserLoggedIn){%>
+            <ul class="navbar-nav mr-auto">
+                <% if (isUserLoggedIn){%> 
+                <li class="nav-item nav-right">
+                    <form action="/search" class="form-inline">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </form>
+                    </li>               
                      <li class="nav-item li-user-dropdown">
                         <div class="user-dropdown dropdown">
                                 <button class="dropdown-toggle user-menu" type="button" id="menu1" data-toggle="dropdown">
@@ -15,15 +21,15 @@
                                     <span class="caret hidden"></span>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-right dropdown-user" role="menu" aria-labelledby="menu1">
-                                    <li><a href="/profile">Your profile</a></li>
-                                    <li><a href="/your-spots">Your spots</a></li>
+                                    <li><a class="int-link" href="/profile">Your profile</a></li>
+                                    <li><a class="int-link" href="/your-spots">My spots</a></li>
 
-                                    <li><a href="/new-spot">New Spot <span> <i class="fa fa-plus-circle nav-icon" aria-hidden="true"></i></span></a></li>
-                                    <li><a href="/fav-spots">Loved Spots <span><i class="fa fa-heart nav-icon" aria-hidden="true"></i>
+                                    <li><a class="int-link" href="/new-spot">New Spot <span> <i class="fa fa-plus-circle nav-icon" aria-hidden="true"></i></span></a></li>
+                                    <li><a class="int-link" href="/fav-spots">Favourites<span><i class="fa fa-heart nav-icon" aria-hidden="true"></i>
                                     </span></a></li>
-
+                                    <hr>
                                     <li class="logout-link" ><form action="/logout" method="post">
-                                    <button type="submit" class="btn-link">Log out</a>
+                                    <button type="submit" class="btn-link">Sign out</a>
                                     </form></li>     
                                 </ul>
                         </div>
@@ -37,16 +43,16 @@
                     </li>
                    
                 <%} else {%>
-                        <li class="nav-item">
+                        <li class="nav-item nav-right">
                         <a class="nav-link" href="/login">Log in</a>
                     </li>
-                    <li class="nav-item-dest">
+                    <li class="nav-item-dest nav-item nav-right-next">
                         <a class="nav-link" href="/signup">Sign up</a>
                     </li>
-                     <li class="nav-item-dest">
+                     <li class="nav-item-dest nav-item">
                         <a class="nav-link" href="/about">About</a>
                     </li>
-                    <li class="nav-item-dest">
+                    <li class="nav-item-dest nav-item">
                         <a class="nav-link" href="/contact">Contact</a>
                     </li>
                  <%}%>

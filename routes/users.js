@@ -101,8 +101,10 @@ router.post('/profile', ensureLoggedIn(), (req, res, next) => {
       if (err){ 
             return next(err);
           } else {
-            console.log(user);
-            res.redirect('/profile');
+            let feedback= "succesfull update"
+            res.render('edit/edit_profile', {countries : global.COUNTRIES,
+                                      interests : req.user.userInfo.interests,
+                                      feedback});
         }
     });  
 });

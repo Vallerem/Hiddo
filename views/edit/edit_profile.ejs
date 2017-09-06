@@ -53,8 +53,9 @@
 
 
 <div class="col-12 col-md-9 col-lg-9">
-
-
+<% if (typeof feedback !== "undefined") { %>
+    		<div class="alert alert-success"><%= feedback %></div>
+<% } %>
 
 <form action="/profile" method="POST" class="update_user" id="update_user_form">
 
