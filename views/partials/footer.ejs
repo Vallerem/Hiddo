@@ -77,8 +77,7 @@
         map: footerMap,
     }); 
     var iw = new google.maps.InfoWindow({
-    content: "Hiddo HQ",
-    color:"black"
+    content: "<div style='color:black'><strong>Hiddo HQ</strong></div>",
   });
     google.maps.event.addListener(spotMarker, "click", function(e) {
     iw.open(footerMap, this);

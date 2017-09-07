@@ -9,8 +9,8 @@
             <ul class="navbar-nav mr-auto">
                 <% if (isUserLoggedIn){%> 
                 <li class="nav-item nav-right">
-                    <form action="/search" class="form-inline">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                    <form action="/search" method="get" class="form-inline">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Search for any spot" name="searched">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </form>
                     </li>               

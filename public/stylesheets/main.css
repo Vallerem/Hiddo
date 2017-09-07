@@ -472,6 +472,18 @@ div .form-check {
 }
 
 /*********  popup  *********************/
+/*********  edit-profile  *********************/
+.update {
+  margin: 20px 0 20px 0;
+}
+
+.title-max {
+  text-align: center;
+  margin: 0 -20px 20px -20px;
+  padding: 2rem;
+  background-color: rgba(153, 204, 196, 0.1);
+}
+
 /*********  edit-spot  *********************/
 /*****    FOOTER     ******/
 .footer--info {
@@ -546,6 +558,51 @@ div .form-check {
   background-color: #f63e28;
 }
 
+/************* Home *******************/
+.new-sp, .callto {
+  padding: 10px 30px;
+  margin: 2rem;
+  border: solid 2px #5CB85C;
+  color: #5CB85C;
+}
+
+.new-sp:hover, .callto:hover {
+  color: white;
+  background: #5CB85C;
+}
+
+.calltoaction {
+  border: solid 3px white;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.calltoaction:hover {
+  background: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.img-home {
+  padding: 2rem 0 3rem 0;
+  border-radius: 50%;
+  height: 450px;
+  width: 450px;
+}
+
+@media (max-width: 650px) {
+  .img-home {
+    margin: auto;
+  }
+}
+
+.text--special {
+  color: #5CB85C;
+}
+
+.d-md-block {
+  text-shadow: 2px 2px 2px 2px black;
+}
+
 .carousel {
   margin-bottom: 4rem;
 }
@@ -557,7 +614,6 @@ div .form-check {
 
 .carousel-item {
   height: 32rem;
-  background-color: #777;
 }
 
 .carousel-item > img {
