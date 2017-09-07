@@ -12,13 +12,30 @@ const {authorizeSpot,checkOwnership} = require('../middleware/spot-authorization
 router.get('/search', function(req, res, next) {
   let itemSearched = req.query.searched;
   let regex = new RegExp( itemSearched, 'g' );
-  Spot.find({ "name" : { $regex: regex, $options: 'i' } }, 
-  (err, spots) => {
+  Spot.find().or(
+  [
+    { "name" : { $regex: regex, $options: 'i' }}, 
+    { "country" : { $regex: regex, $options: 'i' }}
+  ])
+  .sort({"name" : 1})
+  .exec((err, spots) => {
     console.log(spots);
      if (err) return handleError(err);
-     res.render('show/search', {spots})
+     console.log(spots);
+     res.render('show/search', {spots, itemSearched})
    });
 });
+
+
+// app.User.find().or([{ 'firstName': { $regex: re }}, { 'lastName': { $regex: re }}]).sort('title', 1).exec(function(err, users) {
+//     res.json(JSON.stringify(users));
+// });
+
+
+
+
+
+
 
 
 router.get('/show', function(req, res, next) {

@@ -1,9 +1,28 @@
 
-<% userSpot.forEach((spot) => { %>
-  <h3><%= spot.name %></h3>
-  <h2><%= spot.continent %> <small><%= spot.country %></small></h2>
-  <p><strong>spot id: <i><%= spot._id %></i></strong></p>
-  <img class="img-fluid" src="<%= spot.mainImage %>" alt="spot image">
-  <a href="/edit-spot/<%= spot._id %>" class="btn btn-primary">Edit Spot</a>
-<% }) %>
+<div class="row">
+  <%if (userSpot.length <= 0){%>
+  <div style="padding-top:5rem;" class="col-12 sol-md-8">
+      <h3 class="not-found">You've not created any spots yet, wanna try? </h3>
+  </div>
+<div>
+  
+    <div style="padding-top:2rem;" class="col-12 sol-md-4">
+    <a class="btn btn-primary"href="/new-spot">New Spot</a>
+    </div>
 
+  <%}%>
+
+<% userSpot.forEach((spot) => {%>
+  <div class="col-12 col-sm-12 col-md-6 searched-spot" 
+  style="background: url(<%= spot.mainImage%>) no-repeat ; float:left;background-size: cover;">
+    <div class="search-darken"> </div>
+    <p class="search-title"><%= spot.name%> <br>
+    <span class="search-country"><%= spot.country%></span></p>
+    <p class="search-intro">&ldquo;<%= spot.spotInfo.introduction%>&rdquo;</p>
+
+    <a class="btn calltoaction btn--search" href="/spot/<%= spot._id%>">View</a>
+    <a class="btn btn--edit" href="/edit-spot/<%= spot._id%>">Update</a>
+    
+  </div>
+<% })%>
+</div>

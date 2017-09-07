@@ -1,7 +1,25 @@
+<div class="row">
+  <%if (favSpots.length <= 0){%>
+  <div style="padding-top:5rem;" class="col-12 sol-md-8">
+      <h3 class="not-found">Start looking for new spots and see if you like some of them :) </h3>
+  </div>
+<div>
+  
+    <div style="padding-top:2rem;" class="col-12 sol-md-4">
+    <a class="btn btn-primary"href="/explore">Start now</a>
+    </div>
+  <%}%>
 
+<% favSpots.forEach((spot) => {%>
+  <div class="col-12 col-sm-12 col-md-6 searched-spot" 
+  style="background: url(<%= spot.mainImage%>) no-repeat ; float:left;background-size: cover;">
+    <div class="search-darken"> </div>
+    <p class="search-title"><%= spot.name%> <br>
+    <span class="search-country"><%= spot.country%></span></p>
+    <p class="search-intro">&ldquo;<%= spot.spotInfo.introduction%>&rdquo;</p>
 
-
- <% favSpots.forEach( (spot) => { %>
- <img class="img-fluid"src="<%= spot.mainImage%>" alt="">
-  <h1><%= spot.name%></h1>
- <%}); %>
+    <a class="btn calltoaction btn--search" href="/spot/<%= spot._id%>">Revisit</a>
+    
+  </div>
+<% })%>
+</div>
