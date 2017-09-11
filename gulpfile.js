@@ -1,11 +1,17 @@
 const gulp        = require('gulp');
 const rename      = require("gulp-rename");
 const uglify      = require('gulp-uglify');
+const babel       = require('gulp-babel');
 const browserSync = require('browser-sync').create();
   
 gulp.task('uglify', function() {
     return gulp.src('public/js/main.js')
-        .pipe(uglify())
+        .pipe(babel({
+            presets: ['env']
+        }))
+        .pipe(uglify().on('error', function(e){
+            console.log(e);
+         }))
         .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest('public/js'));
 });

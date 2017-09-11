@@ -628,6 +628,12 @@ div .form-check {
   }
 }
 
+@media (min-width: 1024px) {
+  .top-spot-info {
+    margin: 20px 100px;
+  }
+}
+
 .infospot {
   margin: 50px 0 10px 0;
 }

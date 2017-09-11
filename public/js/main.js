@@ -9,6 +9,8 @@ function resize() {
 
   var spotLat, spotLong, lati, longi, arrLength, searchedLength;
 
+  // Makes the last image to show full width 
+
   if (arrLength !== undefined) {
   if (arrLength % 2 !== 0) {
     $('.searched-spot').last()
@@ -337,7 +339,6 @@ displayEditMap();
 }
 
 
-// Makes the last image to show full width 
 
 
 

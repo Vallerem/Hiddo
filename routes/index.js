@@ -5,7 +5,7 @@ var nodemailer = require('nodemailer');
 //pruebas
 let User = require('../models/user');
 let mongoose = require('mongoose');
-var prettyjson = require('prettyjson');
+
 
 // User
 // .findOne({ username: 'Manu' })
