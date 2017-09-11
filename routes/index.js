@@ -7,23 +7,6 @@ let User = require('../models/user');
 let mongoose = require('mongoose');
 
 
-// User
-// .findOne({ username: 'Manu' })
-// .populate('followers')
-// .exec((err, user) => {
-//     if (err) {return (err);} else{
-
-//     let names = [];
-
-//     user.followers.forEach(function(element) {
-//       nyu.push(element.username);
-//     });  
-
-//     console.log(nyu);
-//     mongoose.connection.close();
-//     }
-//   });
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index');
