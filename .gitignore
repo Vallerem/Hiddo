@@ -128,7 +128,3 @@ typings/
 .env
 
 # Image extension
-*.jpg
-*.jpeg
-*.png
-*.gif
