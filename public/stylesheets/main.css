@@ -781,6 +781,10 @@ div .form-check {
   margin-top: 30px;
 }
 
+.footer--info li.s-link {
+  margin-left: -30px;
+}
+
 #footer {
   border-top: solid #5CB85C 5px;
   background: #292B2C;

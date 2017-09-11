@@ -15,7 +15,6 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-
 /***********//*****    Variables    ******//***********/
 
 $primary: #C7E7BE;
@@ -765,6 +764,9 @@ div .form-check  {
 /*****    FOOTER     ******/
 .footer--info {
   margin-top: 30px;
+  li.s-link {
+    margin-left: -30px;
+  }
 }
 
 
