@@ -499,6 +499,16 @@ div .form-check {
 
 /*********  popup  *********************/
 /*********  search  *********************/
+.flexx {
+  display: flex;
+  align-items: center;
+}
+
+.not-found-title {
+  display: flex;
+  align-items: center;
+}
+
 @media (min-width: 1025px) {
   .search-darken {
     background: rgba(125, 235, 255, 0.2);
@@ -514,6 +524,12 @@ div .form-check {
   margin: 0 0 0 0;
   padding: 40px 40px 40px 40px;
   height: 450px;
+}
+
+@media (max-width: 600px) {
+  .searched-spot {
+    height: 400px;
+  }
 }
 
 @media (min-width: 1025px) {
@@ -548,6 +564,13 @@ div .form-check {
   font-size: 1.7rem;
   line-height: 1;
   margin-top: 20px;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .searched-spot .search-intro {
+    font-size: 1.3rem;
+    margin-top: 10px;
+  }
 }
 
 .btn--search {
@@ -588,7 +611,145 @@ div .form-check {
   background-color: rgba(153, 204, 196, 0.1);
 }
 
-/*********  edit-spot  *********************/
+/*********  show-spot  *********************/
+.upd-but {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+.main-spot-content {
+  padding: 30px 100px;
+}
+
+@media (max-width: 600px) {
+  .main-spot-content {
+    padding: 30px 20px;
+  }
+}
+
+.infospot {
+  margin: 50px 0 10px 0;
+}
+
+#show-spot-map {
+  width: 100%;
+  height: 300px;
+}
+
+@media (max-width: 767px) {
+  #show-spot-map {
+    width: 100%;
+    height: 300px;
+  }
+}
+
+.spot-image-main {
+  height: 400px;
+  margin: 0 -15px 0 -15px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.spot-title-main {
+  padding: 20px 0 10px 0;
+  margin: 15px 0;
+  text-align: center;
+  border-top: lightblue solid 1px;
+  border-bottom: lightblue solid 1px;
+}
+
+.spot-intro-main {
+  padding: 20px 0 10px 0;
+  margin: 15px 0;
+  text-align: center;
+}
+
+.spot-intro-main h3::before {
+  content: open-quote;
+  margin-right: 5px;
+}
+
+.spot-intro-main h3::after {
+  content: close-quote;
+  margin-left: 5px;
+}
+
+.spot-infou-main {
+  padding: 20px 70px;
+  margin: 0 -15px;
+}
+
+.spot-infou-main span {
+  font-size: 20px;
+  padding: 10px 10px;
+  position: relative;
+  bottom: 55px;
+}
+
+.spot-creator {
+  width: 500px;
+  margin: 0 auto;
+}
+
+.btn-follow {
+  padding: 0 20px;
+  font-size: 12px;
+  margin-bottom: 20px;
+}
+
+.spot-creator {
+  width: 500px;
+  margin: 20px auto;
+}
+
+@media (max-width: 560px) {
+  .spot-creator {
+    width: 100%;
+    margin: 0;
+    padding-top: 15px;
+    text-align: center;
+  }
+}
+
+.cont-img-creator {
+  margin-right: -50px;
+}
+
+@media (max-width: 560px) {
+  .cont-img-creator {
+    margin-right: 0;
+  }
+}
+
+.media-heading small {
+  color: #5AB45A;
+}
+
+.creator-info-nums {
+  line-height: 0.9;
+}
+
+.creator-info-nums div {
+  margin: 10px 0 -10px 0;
+}
+
+@media (max-width: 560px) {
+  .creator-info-nums div:first-child {
+    margin-left: 2.8rem;
+  }
+}
+
+/*********  show-user  *********************/
+.use-spots {
+  padding: 1rem 0;
+  border-top: solid grey 1px;
+}
+
+.use-interests {
+  margin: 30px 0;
+}
+
 /*****    FOOTER     ******/
 .footer--info {
   margin-top: 30px;
@@ -641,6 +802,18 @@ div .form-check {
 
 .footer-social li {
   float: left;
+  position: relative;
+  top: 0;
+  transition: top ease 0.5s;
+}
+
+.footer-social li:hover {
+  top: -5px;
+}
+
+.footer-social li a:hover {
+  color: white;
+  text-decoration: none;
 }
 
 .linked-in {
@@ -660,6 +833,10 @@ div .form-check {
 }
 
 /************* Home *******************/
+.btn {
+  cursor: pointer;
+}
+
 .new-sp, .callto {
   padding: 10px 30px;
   margin: 2rem;
@@ -668,6 +845,17 @@ div .form-check {
 }
 
 .new-sp:hover, .callto:hover {
+  color: white;
+  background: #5CB85C;
+}
+
+.btn-esp {
+  border: solid 2px #5CB85C;
+  color: #5CB85C;
+  background: white;
+}
+
+.btn-esp:hover {
   color: white;
   background: #5CB85C;
 }
@@ -687,13 +875,21 @@ div .form-check {
   padding: 2rem 0 3rem 0;
   border-radius: 50%;
   height: 450px;
-  width: 450px;
+  width: 400px;
 }
 
 @media (max-width: 500px) {
   .img-home {
-    margin: auto;
-    height: 400px;
+    display: inline-block;
+    margin: 0 auto;
+    height: 350px;
+    width: 400px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .img-home {
+    height: 320px;
     width: 400px;
   }
 }

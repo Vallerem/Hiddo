@@ -1,10 +1,94 @@
 
+<div class="row">
+<div class="col-12 col-md-12 col-lg-6 spot-image-container ">
+  <div style="background-image: url(<%= spot.mainImage%>);" class="spot-image-main">
+    <% if (campaignIsCurrentUsers) {%>
+        <div class="row">
+        <a href="/edit-spot/<%= spot._id %>" class="btn upd-but btn-success">Update spot</a>
+        </div>
+  <% } %>  
+  </div>
+</div>
 
-<h1><%= spot.name%></h1>
 
-<p>ID: <%= spot._id%></p>
-<p>Create by: <%= spot.creator.username%></p>
 
-<% if (campaignIsCurrentUsers) {%>
-  <a href="/edit-spot/<%= spot._id %>" class="btn btn-success">Update spot</a>
-<%}%>
+<div class="col-12 col-md-12 col-lg-6">
+  <div class="spot-title-main">
+  <h2><%= spot.name%></h2>
+  </div>
+
+  <div class="spot-infou-main">
+  <h2><%= spot.continent%></h2>
+  <h4><%= spot.country%></h4>
+  <a href="/categories/<%= spot.category%>"><span style="float:right"class="badge badge-info"><%= spot.category%></span></a>
+  </div>
+
+  <div class="spot-intro-main">
+  <h3><em><%= spot.spotInfo.introduction%></em></h3>
+  </div>
+
+</div>
+
+</div>
+
+<div class="row">
+  <div class="col-12 main-spot-content">
+    <p><%- spot.spotInfo.description.replace(/\n/g, '<br/>') %></p>
+
+  <h2 class="infospot">How to arrive</h2>
+    <p><%- spot.spotInfo.howToArrive.replace(/\n/g, '<br/>') %></p>
+
+    <div id="show-spot-map"></div>  
+
+  <h2 class="infospot">Tips</h2>
+    <p><%- spot.spotInfo.tips.replace(/\n/g, '<br/>') %></p>
+  </div>
+</div>
+
+<hr>
+<div class="row spot-creator">
+
+    <div class="col-12 col-sm-4 col-md-4 col-lg-4 cont-img-creator">
+        <div class="media-img">
+            <a class="" href="/user/<%= spot.creator.username%>">
+                <img class="rounded-circle" src="<%= spot.creator.imgUrl%>" style="width: 100px;height:100px;">
+            </a>
+        </div> 
+    </div>   
+
+    <div style="" class="col-12 col-sm-8 col-md-8 col-lg-8 content-user">        
+            <div class="media-body">
+                <h4 class="media-heading"><%= spot.creator.username%><small><strong></strong> <%= spot.creator.userInfo.country%></small></h4>
+                <div class="row creator-info-nums">
+                  <div class="col-3 nums-elem">
+                    <p><%= spot.creator.userSpots.length%> <br><small>Spots</small></p>
+                  </div>
+                  <div class="col-3 nums-elem">
+                    <p><%= spot.creator.followers.length%> <br> <small>Followers</small></p>
+                  </div>
+                  <div class="col-3 nums-elem">
+                    <p><%= spot.creator.following.length%> <br> <small>Following</small></p>
+                  </div>
+                </div>
+
+              </div>
+
+                <hr style="margin:8px auto">
+            <button class="btn btn-sm btn-success btn-follow" type="button">Follow</button>
+        </div>
+
+
+</div>
+
+
+
+<script>
+  var creatorId = "<%= spot.creator._id%>";
+  var spotLat = <%= spot.location.coordinates[1]%>;
+  var spotLong = <%= spot.location.coordinates[0]%>;
+  var locationName = "<%= spot.name %>";
+  var locationCountry = "<%= spot.country %>";
+</script>
+
+
+

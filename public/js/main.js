@@ -7,6 +7,31 @@ function resize() {
   $(window).resize(resize);
   resize();
 
+  var spotLat, spotLong, lati, longi, arrLength, searchedLength;
+
+  if (arrLength !== undefined) {
+  if (arrLength % 2 !== 0) {
+    $('.searched-spot').last()
+    .removeClass('col-md-6')
+    .addClass('col-md-12')
+  }
+}
+
+if (searchedLength !== undefined) {
+  if (searchedLength % 2 !== 0) {
+    $('.searched-spot').last()
+    .removeClass('col-md-6')
+    .addClass('col-md-12')
+  }
+}
+
+
+
+
+
+
+
+
 $(document).ready(function() {
 
   // changes the position of the user dropdown
@@ -184,7 +209,7 @@ $(document).ready(function() {
     },
     map: mapu,
     label: {
-      color: 'black',
+      color: 'white',
       fontWeight: 'bold',
       text: 'You are here',
     },
@@ -244,9 +269,75 @@ $(document).ready(function() {
     } 
   });
 
-  // POPUP
- 
+  // Follow   TODO  ///////
+    //  console.log(creatorId)
+  
 
+  // Displays the map on the show map view
+  
+
+  if (spotLat && spotLong !== undefined ) {
+    var theSpotMap;
+
+    function showMap() {
+        theSpotMap = new google.maps.Map(document.getElementById('show-spot-map'), {
+          center: {lat: spotLat, lng: spotLong },
+          zoom: 11, 
+          mapTypeId: 'roadmap'
+        });
+
+      var spotMarkerr = new google.maps.Marker({
+        position: {lat: spotLat, lng: spotLong },
+        map: theSpotMap,
+    }); 
+    var iw = new google.maps.InfoWindow({
+    content:  `<strong>${locationName}</strong>
+     - 
+    <em>${locationCountry}</em> <br><br>
+    <strong>Latitude</strong>: ${spotLat}<br>
+    <strong>Longitude</strong>: ${spotLong}`,
+  });
+    google.maps.event.addListener(spotMarkerr, "click", function(e) {
+    iw.open(theSpotMap, this);
+  });
+  }
+  showMap();
+  }
+    
+
+  // Displays the map on edit map /////
+
+  if (lati && longi !== undefined ) {
+    
+    function displayEditMap() {
+      var currentMap;
+        currentMap = new google.maps.Map(document.getElementById('spot-loc'), {
+          center: {lat: lati, lng: longi},
+          zoom: 11, 
+          mapTypeId: 'roadmap'
+        });
+
+      var spotMarker = new google.maps.Marker({
+        position: {lat: lati, lng: longi},
+        map: currentMap,
+        animation: google.maps.Animation.DROP,
+    }); 
+    var iw = new google.maps.InfoWindow({
+    content:  `<strong>${locationName}</strong>
+     - 
+    <em>${locationCountry}</em> <br><br>
+    <strong>Latitude</strong>: ${lati}<br>
+    <strong>Longitude</strong>: ${longi}`
+  });
+    google.maps.event.addListener(spotMarker, "click", function(e) {
+    iw.open(currentMap, this);
+  });
+}
+displayEditMap();
+}
+
+
+// Makes the last image to show full width 
 
 
 

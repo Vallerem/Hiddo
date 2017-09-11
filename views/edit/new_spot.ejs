@@ -6,7 +6,7 @@
 
   <input type="hidden" class="id_form" name="creator" value="<%= currentUser._id %>" required>
 
-  <div class="form-group">
+  <div style="margin-top:30px;"class="form-group">
     <label for="name"><strong>Spot name</strong></label>
     <input type="text" name="name" class="form-control" id="spot-name" maxlength="60" required>
   </div>
@@ -21,7 +21,7 @@
   </div>
 
   <div class="country_form">
-  <label class="mr-sm-2" for="inlineFormCustomSelect"><strong>Spot country</strong></label>
+  <label class="mr-sm-4" for="inlineFormCustomSelect"><strong>Spot country</strong></label>
   <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="country" name="country" required>
     <% global.COUNTRIES.forEach( (country) => { %>
     <option name="country" value="<%=country %>"><%=country %></option>
@@ -30,7 +30,7 @@
   </div>
 
   <div class="category_form">
-  <label class="mr-sm-2" for="inlineFormCustomSelect"><strong>Spot category</strong></label>
+  <label class="mr-sm-3" for="inlineFormCustomSelect"><strong>Spot category</strong></label>
   <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="category" name="category" required>
     <% global.INTERESTS.forEach( (interest) => { %>
     <option name="category" value="<%=interest %>"><%=interest %></option>
@@ -39,7 +39,7 @@
   </div>
 
 
-<h2>detailed information</h2>
+<h2 style="margin-top:50px;margin-bottom:20px;">detailed information</h2>
 
   <div class="form-group spot-intro">
     <label for="introduction"><strong>Brief quote to describe this spot</strong></label>
@@ -73,30 +73,30 @@
   <input type="hidden" for="longitude" id="spot-longitude" name="longitude" value="undefined" required>
 
 
-<h3>Spot location</h3>
+<h2 style="margin-top:50px;margin-bottom:20px;">Spot location</h3>
 
   <div class="form-group use-current-location">
-  <button class="btn btn-primary" type="button" id="current-location">
+  <button class="btn btn-esp" type="button" id="current-location">
   Use current location</button>
   
   </div>
 
-<div id="google_map" class="hidden" style="width:800px;height:400px;">
+<div id="google_map" class="hidden" style="width:90%;height:400px;margin-bottom:20px;">
   </div>
 
 
   
 <div class"form-group">
-<button class="btn btn-primary" type="button" id="existing-location">
+<button style="margin-bottom: 10px"class="btn btn-primary" type="button" id="existing-location">
   Use an existing or near location</button>
- <button class="btn btn-success" type="button" id="save-existing-location">
+ <button style="margin-bottom: 10px" class="btn btn-success" type="button" id="save-existing-location">
   Save chosen location</button>
 </div>
 
 
 <div class="existing-loc">
  <input id="pac-input" class="controls" type="text" placeholder="Search Location">
- <div id="map-search"></div>
+ <div id="map-search" style="width:90%;height:400px;margin-bottom:20px;"></div>
 </div>
 
 

@@ -1,10 +1,68 @@
-<h1><%= user.username%></h1>
+<div class="row spot-creator">
 
- <% user.userSpots.forEach( (spot) => { %>
-    <div>
-      <h3><%= spot.name%></h3>
-      <h4><%= spot.country%></h4>
-      <p><%= spot.spotInfo.introduction%></p>
-    </div>
-    <%}); %>
-    
+    <div class="col-12 col-sm-4 col-md-4 col-lg-4 cont-img-creator">
+        <div class="media-img">
+            <a class="" href="/user/<%= user.username%>">
+                <img class="rounded-circle" src="<%= user.imgUrl%>" style="width: 100px;height:100px;">
+            </a>
+        </div> 
+    </div>   
+
+    <div style="" class="col-12 col-sm-8 col-md-8 col-lg-8 content-user">        
+            <div class="media-body">
+                <h4 class="media-heading"><%= user.username%><small><strong></strong> <%= user.userInfo.country%></small></h4>
+                <div class="row creator-info-nums">
+                  <div class="col-3 nums-elem">
+                    <p><%= user.userSpots.length%> <br><small>Spots</small></p>
+                  </div>
+                  <div class="col-3 nums-elem">
+                    <p><%= user.followers.length%> <br> <small>Followers</small></p>
+                  </div>
+                  <div class="col-3 nums-elem">
+                    <p><%= user.following.length%> <br> <small>Following</small></p>
+                  </div>
+                </div>
+
+              </div>
+
+                <hr style="margin:8px auto">
+            <button class="btn btn-sm btn-success btn-follow" type="button">Follow</button>
+        </div>
+
+<div>
+  <p><%= user.userInfo.description%></p>
+</div>
+
+<div class="use-interests">
+<h4>Interests</h4>
+  <% user.userInfo.interests.forEach( (interest) => { %>
+    <a href="/categories/<%= interest%>"><span class="badge badge-primary"><%= interest%></span></a>
+  <% }); %>
+</div>
+
+</div>
+
+
+
+
+
+
+
+<h1 class="use-spots" style="text-align:center"><%= user.username%> Spots</h1>
+
+<div class="row">
+  <% user.userSpots.forEach( (spot) => {%>
+  <div class="col-12 col-sm-12 col-md-6 searched-spot"
+  style="background: url(<%= spot.mainImage%>) no-repeat ; float:left;background-size: cover;">
+    <div class="search-darken"> </div>
+    <p class="search-title"><%= spot.name%> <br>
+    <span class="search-country"><%= spot.country%></span></p>
+    <p class="search-intro">&ldquo;<%= spot.spotInfo.introduction%>&rdquo;</p>
+    <a class="btn calltoaction btn--search" href="/spot/<%= spot._id%>">View</a>
+  </div>
+<% });%>
+</div>
+
+<script>
+  var arrLength = <%= user.userSpots.length %>;
+</script>

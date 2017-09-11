@@ -1,9 +1,9 @@
 <div class="row">
-<%if (typeof itemSearched !== undefined) {%>
+<%if (typeof category !== undefined) {%>
   <%if (spots.length <= 0){%>
   <div class="flexx">
     <div class="col-12 not-found-title">
-      <h2 class="not-found">Ups, we didn't find any spots by the words: <br><br><em style="color: #5CB85C"><%=itemSearched%></em></h2>
+      <h2 class="not-found">Ups, we didn't find any spots with the category:<br><br><em style="color: #5CB85C"><%=category%></em></h2>
     </div>
   </div>
   <%}%>

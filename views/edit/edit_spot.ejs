@@ -244,40 +244,13 @@
 </form>
 
 
- <script src="https://maps.googleapis.com/maps/api/js?key=<%=mapsApiKey%>&libraries=places&callback=initAutocomplete"></script>
-
-<script>
-var lati  = <%- JSON.stringify(spot.location.coordinates[1]) %>;
-var longi = <%- JSON.stringify(spot.location.coordinates[0]) %>;
-
-console.log(lati);
-console.log(longi);
-    
-    var currentMap;
-    function initMap() {
-        currentMap = new google.maps.Map(document.getElementById('spot-loc'), {
-          center: {lat: lati, lng: longi},
-          zoom: 11, 
-          mapTypeId: 'roadmap'
-        });
-
-      var spotMarker = new google.maps.Marker({
-        position: {lat: lati, lng: longi},
-        map: currentMap,
-        animation: google.maps.Animation.DROP,
-    }); 
-    var iw = new google.maps.InfoWindow({
-    content:  `<%- JSON.parse(JSON.stringify(spot.name)) %>
-     - 
-    <strong><%- JSON.parse(JSON.stringify(spot.country)) %></strong>`
-  });
-    google.maps.event.addListener(spotMarker, "click", function(e) {
-    iw.open(currentMap, this);
-  });
-  }
-
-initMap();
+<script defer>
+var lati  = <%= spot.location.coordinates[1] %>;
+var longi = <%= spot.location.coordinates[0] %>;
+var locationName = "<%= spot.name %>";
+var locationCountry = "<%= spot.country %>";
 
 </script>
+
 </div>
 </div>
