@@ -98,7 +98,7 @@ passport.use('local-signup', new LocalStrategy(
                 if (req.file === undefined) {
                   avatarUrl = '/images/default.png';
                 } else {
-                  avatarUrl = `/uploads/${req.file.filename}`;
+                  avatarUrl = `https://s3.eu-central-1.amazonaws.com/hiddo/avatars/${req.file.key}`;
                 }
                 // Checkbox filter madness
                 let interestsArray = [req.body.nature, 

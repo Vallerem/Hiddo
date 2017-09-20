@@ -21,18 +21,12 @@ aws.config.region = 'eu-central-1';
 aws.config.accessKeyId = process.env.AWS_ACCESS_KEY_ID;
 aws.config.secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
 
-// aws.config({
-//     secretAccessKey: ,
-//     accessKeyId: process.env.AWSSecretKey,
-//     region: 'eu-central-1'
-// });
-
 let s3 = new aws.S3();
 
 var upload = multer({
     storage: multerS3({
         s3: s3,
-        bucket: 'hiddo',
+        bucket: 'hiddo/avatars',
         key: function (req, file, cb) {
             console.log(file);
             cb(null, Date.now() + '.jpg');
@@ -40,18 +34,16 @@ var upload = multer({
     })
 });
 
+// var storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, './public/uploads/');
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, Date.now() + '.jpg');
+//   }
+// });
 
-
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './public/uploads/');
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + '.jpg');
-  }
-});
-
-let mehupload = multer({ storage:storage, fileFilter: imageFilter });
+// let mehupload = multer({ storage:storage, fileFilter: imageFilter });
 
 //// Signup
 router.get('/signup', ensureLoggedOut(), (req, res, next) => {

@@ -1,8 +1,11 @@
 const express   = require('express');
 const router    = express.Router();
+const path      = require('path');
 const User      = require('../models/user');
 const Spot      = require('../models/spot');
 const passport  = require('passport');
+const aws       = require('aws-sdk');
+const multerS3  = require('multer-s3');
 const multer    = require('multer');
 const global    = require('../global')
 const fs        = require('fs');
@@ -14,26 +17,45 @@ const {authorizeSpot,checkOwnership} = require('../middleware/spot-authorization
  ////// Middleware /////
 ///////////////////////
 
-//  Multer 
-// Function to filter images extension
-const imageFilter = function (req, file, cb) {
-    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
-        return cb(new Error('Only image files are allowed!'), false);
-        //Should implement something better with flash-message
-    }
-    cb(null, true);
-};
+aws.config.region = 'eu-central-1';
+aws.config.accessKeyId = process.env.AWS_ACCESS_KEY_ID;
+aws.config.secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
 
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './public/uploads/spots');
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + '.jpg');
-  }
+let s3 = new aws.S3();
+
+var upload = multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: 'hiddo/spots',
+        key: function (req, file, cb) {
+            console.log(file);
+            cb(null, Date.now() + '.jpg');
+        }
+    })
 });
 
-let upload = multer({ storage:storage, fileFilter: imageFilter });
+//  Multer 
+// Function to filter images extension
+
+
+// const imageFilter = function (req, file, cb) {
+//     if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+//         return cb(new Error('Only image files are allowed!'), false);
+//         //Should implement something better with flash-message
+//     }
+//     cb(null, true);
+// };
+
+// var storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, './public/uploads/spots');
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, Date.now() + '.jpg');
+//   }
+// });
+
+// let upload = multer({ storage:storage, fileFilter: imageFilter });
 
   ///////////////////////
  //////// CRUD /////////
@@ -51,7 +73,7 @@ router.post('/new-spot', upload.single('mainImage'), ensureLoggedIn(),
      if (req.file === undefined) {
           spotImg = "/images/default_spot.jpg" ;
         } else {
-          spotImg = `/uploads/spots/${req.file.filename}`;
+          spotImg = `https://s3.eu-central-1.amazonaws.com/hiddo/spots/${req.file.key}`;
         }
 
   let spotLocation = {
@@ -89,7 +111,7 @@ router.post('/new-spot', upload.single('mainImage'), ensureLoggedIn(),
     // console.log(doc);
 }); 
   res.redirect(`/spot/${newSpot._id}`);
-  console.log("*************** success!!! ***********");
+  // console.log("*************** success!!! ***********");
    }
 });
 });
@@ -143,29 +165,22 @@ router.post('/edit-spot', ensureLoggedIn(), (req, res, next) => {
 router.post('/spot-img', ensureLoggedIn(), upload.single('mainImage'), (req, res, next) => {
 
   let spotId = req.body.spot_id
-  let oldImg = `./public/${req.body.old_imgUrl}`;
-  let newImg = `/uploads/spots/${req.file.filename}`;
 
-   Spot.findByIdAndUpdate(spotId, {$set:{mainImage:newImg}}, {new: true}, 
+  let oldImg = req.body.old_imgUrl;
+  let imgToDelete = path.basename(req.body.old_imgUrl);
+  let newImg = `https://s3.eu-central-1.amazonaws.com/hiddo/spots/${req.file.key}`;
+
+  Spot.findByIdAndUpdate(spotId, {$set:{mainImage:newImg}}, {new: true}, 
    (err, spot) => {
-    if (err){ return next(err);}
-      // console.log(spot);
-      fs.stat(oldImg, (err, stats) => {
-        if (err) {
-            return console.error(err);
-        }
-        if (oldImg === './public//images/default_spot.png') {
-          return res.redirect(`/edit-spot/${spotId}`);
-        }
-        fs.unlink(oldImg,(err) => {
-        if(err) return console.log(err);
-        console.log('file deleted successfully');
+    if (err){ return next(err);} 
+      s3.deleteObject({
+      Bucket: 'hiddo',
+      Key: `spots/${imgToDelete}`
+    },function (err,data){})
+      
         res.redirect(`/edit-spot/${spotId}`);
       });  
     });
-  });  
-}); 
-
 
 router.post('/spot/delete', ensureLoggedIn(), (req, res, next) => {
   let spotId = req.body.spotId;
