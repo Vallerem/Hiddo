@@ -224,7 +224,7 @@ router.get('/fav-spots', ensureLoggedIn(), (req, res, next) => {
   .populate('favouriteSpots')
   .exec((err, user) => {
     if (err) {return next(err);} 
-    res.render('show/fav_spots',{favSpots:user.favouriteSpots });
+    res.render('show/fav_spots',{favSpots:user.favouriteSpots});
     });
 });
 

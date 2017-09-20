@@ -671,8 +671,8 @@ div .form-check {
 }
 
 .spot-image-main {
-  height: 400px;
-  margin: 0 -15px 0 -15px;
+  height: 100%;
+  margin: auto;
   background-size: cover;
   background-repeat: no-repeat;
 }

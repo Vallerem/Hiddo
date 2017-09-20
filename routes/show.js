@@ -38,10 +38,19 @@ router.get('/categories/:category', ensureLoggedIn(), function(req, res, next) {
 
 
 router.get('/explore', function(req, res, next) {
-  Spot.find({country: "Greece"}, (err, users) => {
-    if (err) {console.log(err);}
-    res.send(users)
-  });
+  res.render('explore', {global});
+  // Spot.find({country: "Greece"}, (err, users) => {
+  //   if (err) {console.log(err);}
+  //   res.send(users)
+  // });
+});
+
+router.get('/explore', function(req, res, next) {
+  res.render('explore', {global});
+  // Spot.find({country: "Greece"}, (err, users) => {
+  //   if (err) {console.log(err);}
+  //   res.send(users)
+  // });
 });
 
 
