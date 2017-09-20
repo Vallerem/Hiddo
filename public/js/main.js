@@ -338,7 +338,20 @@ $(document).ready(function() {
 displayEditMap();
 }
 
-
+$('.btn-follow').click( function(){
+ $.ajax({
+   type: "post",
+   url: "/follow",
+   data: "data",
+   dataType: "dataType",
+   success: function (response) {
+     
+   },
+   error: function (response) {
+        console.log('ERROR updating image');
+      }
+ });
+})
 
 
 
