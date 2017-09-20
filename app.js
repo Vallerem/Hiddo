@@ -13,6 +13,8 @@ const MongoStore     = require('connect-mongo')(session);
 const bcrypt         = require('bcrypt');
 const User           = require('./models/user');
 const flash          = require("connect-flash");
+const aws            = require('aws-sdk');
+const multerS3       = require('multer-s3');
 
 
 require("dotenv").config();

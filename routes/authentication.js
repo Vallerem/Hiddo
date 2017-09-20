@@ -3,9 +3,10 @@ const router    = express.Router();
 const User      = require('../models/user');
 const passport  = require('passport');
 const multer    = require('multer');
-const global    = require('../global')
+const aws       = require('aws-sdk');
+const multerS3  = require('multer-s3');
+const global    = require('../global');
 const { ensureLoggedIn, ensureLoggedOut } = require('connect-ensure-login');
-
 
 // Function to filter images extension
 const imageFilter = function (req, file, cb) {
@@ -16,6 +17,31 @@ const imageFilter = function (req, file, cb) {
     cb(null, true);
 };
 
+aws.config.region = 'eu-central-1';
+aws.config.accessKeyId = process.env.AWS_ACCESS_KEY_ID;
+aws.config.secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
+
+// aws.config({
+//     secretAccessKey: ,
+//     accessKeyId: process.env.AWSSecretKey,
+//     region: 'eu-central-1'
+// });
+
+let s3 = new aws.S3();
+
+var upload = multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: 'hiddo',
+        key: function (req, file, cb) {
+            console.log(file);
+            cb(null, Date.now() + '.jpg');
+        }
+    })
+});
+
+
+
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, './public/uploads/');
@@ -25,7 +51,7 @@ var storage = multer.diskStorage({
   }
 });
 
-let upload = multer({ storage:storage, fileFilter: imageFilter });
+let mehupload = multer({ storage:storage, fileFilter: imageFilter });
 
 //// Signup
 router.get('/signup', ensureLoggedOut(), (req, res, next) => {
