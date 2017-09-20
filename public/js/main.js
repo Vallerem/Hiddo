@@ -338,14 +338,20 @@ $(document).ready(function() {
 displayEditMap();
 }
 
-$('.btn-follow').click( function(){
+$('.btn-explore').on('click', function(){
  $.ajax({
-   type: "post",
-   url: "/follow",
-   data: "data",
-   dataType: "dataType",
+   type: "GET",
+   url: "/exploring",
+   dataType: 'json',
    success: function (response) {
-     
+     response.forEach( function(elem) {
+      $('.container-spots').append(`<div class="col-12 col-sm-12 col-md-6 searched-spot" style="background: url(${elem.mainImage}) no-repeat; float:left;background-size: cover;"><div class="search-darken"> </div><p class="search-title"> ${elem.name}  <br><span class="search-country"> ${elem.country} </span></p>
+    <p class=" hidden-sm-down search-intro">&ldquo; ${elem.spotInfo.introduction} &rdquo;</p>
+
+    <p><a class="btn calltoaction btn--search" href="/spot/${elem._id }">Discover</a>
+    </p>
+  </div>`);
+     })
    },
    error: function (response) {
         console.log('ERROR updating image');

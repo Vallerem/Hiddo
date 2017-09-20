@@ -559,6 +559,7 @@ div .form-check  {
     font-size: 2.8rem;
     line-height: 1;
     
+
     span {
       margin-top: 3px;
       color: rgba(125,235,255,1);
@@ -654,8 +655,8 @@ div .form-check  {
 }
 
 .spot-image-main {
-  height: 100%;
-  margin: auto;
+  height: 400px;
+  margin: 0 -15px 0 -15px;
   background-size:cover;
   background-repeat:no-repeat;
   @media(max-width: 768px) {
