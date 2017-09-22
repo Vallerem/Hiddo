@@ -7,7 +7,7 @@ function resize() {
   $(window).resize(resize);
   resize();
 
-  var spotLat, spotLong, lati, longi, arrLength, searchedLength;
+  var spotLat, spotLong, lati, longi, arrLength, searchedLength, yourSpots;
 
   // Makes the last image to show full width 
 
@@ -34,12 +34,6 @@ if (yourSpots !== undefined) {
     .addClass('col-md-12')
   }
 }
-
-
-
-
-
-
 
 $(document).ready(function() {
 
