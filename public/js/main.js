@@ -341,6 +341,7 @@ $('.btn-explore').on('click', function(){
      if (!$('.container-spots').is(':empty')) {
          $('.container-spots').empty();
        }
+      $('.explore-message').append(`<h1>${response.length} spots found</h2>`)
      response.forEach( function(elem) {
        
       $('.container-spots').append(`<div class="col-12 col-sm-12 col-md-6 searched-spot" style="background: url(${elem.mainImage}) no-repeat; float:left;background-size: cover;"><div class="search-darken"> </div><p class="search-title"> ${elem.name}  <br><span class="search-country"> ${elem.country} </span></p>
@@ -355,8 +356,7 @@ $('.btn-explore').on('click', function(){
             $('.searched-spot').last()
             .removeClass('col-md-6')
             .addClass('col-md-12')
-            .css("margin-bottom", "-293px");
-          }
+          } 
         }
    },
    error: function (response) {

@@ -555,7 +555,7 @@ div .form-check  {
   .search-title {
     display:inline-block;
     color:white;
-    text-shadow: 4px 4px 4px 4px black;
+    text-shadow: 3px 3px black;
     font-size: 2.8rem;
     line-height: 1;
     
@@ -563,13 +563,13 @@ div .form-check  {
     span {
       margin-top: 3px;
       color: rgba(125,235,255,1);
-      text-shadow: 22px 22px 22px 22px black;
+      text-shadow: 3px 3px black;
       font-size: 2rem;
     }
   }
   .search-intro {
     color:white;
-    text-shadow: 22px 22px 22px 22px black;
+    text-shadow: 3px 3px black;
     font-size: 1.7rem;
     line-height: 1;
     margin-top: 20px;
@@ -900,7 +900,7 @@ div .form-check  {
 }
 
 .d-md-block {
-  text-shadow: 2px 2px 2px 2px black;
+  text-shadow: 3px 3px black;
   @media(max-width: 500px){
     font-size: 12px;
     margin:0 -50px 0 -80px;
@@ -964,4 +964,27 @@ div .form-check  {
   .featurette-heading {
     margin-top: 7rem;
   }
+}
+
+/** Explore  **/
+
+.explore-main {
+  height: 400px;
+  background: url('/images/explore-gif.gif') no-repeat;
+  background-size: cover;
+  border-bottom: solid 3px #5CB85C;
+
+  h1 {
+    color:white;
+    position: absolute;
+    top: 47%;
+    left: 150px;
+    text-shadow: 3px 3px black;
+  }
+}
+
+.btn-explore {
+  position: absolute;
+  top: 47%;
+  right: 150px;
 }
