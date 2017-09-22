@@ -225,12 +225,6 @@ $(document).ready(function() {
     }
   });
 
-
-
-
-
-
-
   // Update user image (ajax call)
   $('.update-image').on('submit', function(e){
     e.preventDefault()
@@ -344,7 +338,11 @@ $('.btn-explore').on('click', function(){
    url: "/exploring",
    dataType: 'json',
    success: function (response) {
+     if (!$('.container-spots').is(':empty')) {
+         $('.container-spots').empty();
+       }
      response.forEach( function(elem) {
+       
       $('.container-spots').append(`<div class="col-12 col-sm-12 col-md-6 searched-spot" style="background: url(${elem.mainImage}) no-repeat; float:left;background-size: cover;"><div class="search-darken"> </div><p class="search-title"> ${elem.name}  <br><span class="search-country"> ${elem.country} </span></p>
     <p class=" hidden-sm-down search-intro">&ldquo; ${elem.spotInfo.introduction} &rdquo;</p>
 
@@ -352,6 +350,14 @@ $('.btn-explore').on('click', function(){
     </p>
   </div>`);
      })
+     if (response !== undefined) {
+          if (response.length % 2 !== 0) {
+            $('.searched-spot').last()
+            .removeClass('col-md-6')
+            .addClass('col-md-12')
+            .css("margin-bottom", "-293px");
+          }
+        }
    },
    error: function (response) {
         console.log('ERROR updating image');
