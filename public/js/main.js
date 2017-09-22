@@ -27,6 +27,13 @@ if (searchedLength !== undefined) {
   }
 }
 
+if (yourSpots !== undefined) {
+  if (yourSpots % 2 !== 0) {
+    $('.searched-spot').last()
+    .removeClass('col-md-6')
+    .addClass('col-md-12')
+  }
+}
 
 
 

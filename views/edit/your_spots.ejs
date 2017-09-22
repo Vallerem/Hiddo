@@ -13,12 +13,7 @@
   <%}%>
 
 <% userSpot.forEach((spot) => {%>
-  <div class="
-  
-  
-  
-  
-  col-12 col-sm-12 col-md-6 searched-spot" 
+  <div class="col-12 col-sm-12 col-md-6 searched-spot" 
   style="background: url(<%= spot.mainImage%>) no-repeat ; float:left;background-size: cover;">
     <div class="search-darken"> </div>
     <p class="search-title"><%= spot.name%> <br>
@@ -31,3 +26,7 @@
   </div>
 <% })%>
 </div>
+
+<script>
+  var yourSpots = <%= userSpot.length %>;
+</script>
