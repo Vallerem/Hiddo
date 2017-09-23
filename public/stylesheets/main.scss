@@ -77,6 +77,25 @@ input[type="password"] {
 
 /*****     NAVBAR    ******/
 
+.new-tag::before {
+  content: 'NEW';
+  color: orange;
+  font-size: 12px;
+  position:relative;
+  top: -13px;
+  right:-65px;
+  z-index: 2;
+  padding: 0;
+  margin: 0;
+
+  @media(max-width:770px){
+    top: 14px;
+    right:-35px;
+    z-index: 2;
+  padding: 0;
+  margin: 0;
+  }
+}
 
 @media(max-width:600px){
   .search-bar{
@@ -762,6 +781,14 @@ div .form-check  {
 
 
 /*****    FOOTER     ******/
+
+.h3-footer{
+  margin-top: 30px;
+  font-size: 20px;
+  color: white;
+}
+
+
 .footer--info {
   margin-top: 30px;
   li.s-link {
@@ -790,7 +817,7 @@ div .form-check  {
   }
 
   .fotfirst{
-    margin-top: 30px;
+    margin-top: 20px;
   }
 }
 

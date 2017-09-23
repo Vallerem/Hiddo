@@ -37,7 +37,6 @@ if (yourSpots !== undefined) {
 
 $(document).ready(function() {
 
-  // changes the position of the user dropdown
   /// Make the footer position great again
   var docHeight = $(window).height();
   var footerHeight = $('#footer').height();
